@@ -109,7 +109,7 @@ local function main()
   local leadingMeasureBasis = 4
   local newMeasureBasis = 4
   local trailingMeasureBasis = 4
-  local dryRun = true
+  local dryRun = false
 
   if reaper.SNM_GetIntConfigVarEx(projectId, "itemtimelock", -100) ~= 0 then
     userError("Timebase for items/envelopes/markers must be set to \"Time\"")
@@ -151,7 +151,7 @@ local function main()
   local newMeasureQns = tonumber(newMeasureQnsStr)
   local trailingMeasureQns = tonumber(trailingMeasureQnsStr)
 
-  if not createSingleMeasure(
+  createSingleMeasure(
     projectId,
     leadingMeasureQns,
     leadingMeasureBasis,
@@ -159,9 +159,7 @@ local function main()
     newMeasureBasis,
     trailingMeasureQns,
     trailingMeasureBasis,
-    dryRun) then
-    return false
-  end
+    dryRun)
 
   reaper.UpdateTimeline()
   return true
