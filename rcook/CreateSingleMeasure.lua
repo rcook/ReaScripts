@@ -1,23 +1,26 @@
+local SCRIPT_TITLE = "CreateSingleMeasure"
+
+
 local function print(param)
   reaper.ShowConsoleMsg("[" .. tostring(reaper.time_precise()) .. "] " .. tostring(param) .. "\n")
 end
 
-local function userError(param)
+local function show_user_error(param)
   local s = tostring(param)
-  reaper.ShowMessageBox(s, "CreateSingleMeasure", 0)
+  reaper.ShowMessageBox(s, SCRIPT_TITLE, 0)
 end
 
-local function fatalError(param)
+local function abort(param)
   local s = tostring(param)
-  reaper.ShowMessageBox("Error: " .. s, "CreateSingleMeasure", 0)
+  reaper.ShowMessageBox("Error: " .. s, SCRIPT_TITLE, 0)
   reaper.ReaScriptError("!" .. s)
 end
 
-local function formatTime(pos)
+local function format_time(pos)
   return reaper.format_timestr_pos(pos, "", -1)
 end
 
-local function getUserInputs(title, inputs)
+local function get_user_inputs(title, inputs)
   local captions_csv = ""
   local values_csv = ""
   local results_regex = ""
@@ -39,131 +42,130 @@ local function getUserInputs(title, inputs)
   end
 end
 
-local function createSingleMeasure(
-  projectId,
-  leadingMeasureQns,
-  leadingMeasureBasis,
-  newMeasureQns,
-  newMeasureBasis,
-  trailingMeasureQns,
-  trailingMeasureBasis,
-  dryRun)
+local function create_single_measure(
+  project_id,
+  leading_measure_qns,
+  leading_measure_basis,
+  new_measure_qns,
+  new_measure_basis,
+  trailing_measure_qns,
+  trailing_measure_basis,
+  dry_run)
 
-  local newMeasureStartTime, newMeasureEndTime = reaper.GetSet_LoopTimeRange2(projectId, false, false, 0, 0, false)
-  local newMeasureLength = newMeasureEndTime - newMeasureStartTime
-  if newMeasureLength == 0 then
-    fatalError("Invalid time range selection")
+  local new_measure_start_time, new_measure_end_time = reaper.GetSet_LoopTimeRange2(project_id, false, false, 0, 0, false)
+  local new_measure_length = new_measure_end_time - new_measure_start_time
+  if new_measure_length == 0 then
+    abort("Invalid time range selection")
   end
 
-  local newMeasureStartQn = reaper.TimeMap2_timeToQN(projectId, newMeasureStartTime)
-  local newMeasureEndQn = reaper.TimeMap2_timeToQN(projectId, newMeasureEndTime)
+  local new_measure_start_qn = reaper.TimeMap2_timeToQN(project_id, new_measure_start_time)
+  local new_measure_end_qn = reaper.TimeMap2_timeToQN(project_id, new_measure_end_time)
 
   -- Measure immediately before selection
-  -- Measure starts at leadingMeasureStartTime and ends at newMeasureStartTime
-  local measureNumber = reaper.TimeMap_QNToMeasures(projectId, newMeasureStartQn)
-  local leadingMeasureStartTime, _, _, originalTimeSigNum, originalTimeSigDenom, originalTempo = reaper.TimeMap_GetMeasureInfo(projectId, measureNumber - 1)
-  local leadingMeasureLength = newMeasureStartTime - leadingMeasureStartTime
-  if leadingMeasureLength == 0 then
-    fatalError("Invalid time range selection")
+  -- Measure starts at leading_measure_start_time and ends at new_measure_start_time
+  local measure_number = reaper.TimeMap_QNToMeasures(project_id, new_measure_start_qn)
+  local leading_measure_start_time, _, _, original_time_sig_num, original_time_sig_denom, original_tempo = reaper.TimeMap_GetMeasureInfo(project_id, measure_number - 1)
+  local leading_measure_length = new_measure_start_time - leading_measure_start_time
+  if leading_measure_length == 0 then
+    abort("Invalid time range selection")
   end
 
   -- Measure immediately after selection
-  -- Measure starts at newMeasureEndTime and ends at trailingMeasureEndTime
-  local measureNumber = reaper.TimeMap_QNToMeasures(projectId, newMeasureEndQn)
-  local trailingMeasureEndTime, _, _, _, _, _= reaper.TimeMap_GetMeasureInfo(projectId, measureNumber)
-  local trailingMeasureLength = trailingMeasureEndTime - newMeasureEndTime
-  if trailingMeasureLength == 0 then
-    fatalError("Invalid time range selection")
+  -- Measure starts at new_measure_end_time and ends at trailing_measure_end_time
+  local measure_number = reaper.TimeMap_QNToMeasures(project_id, new_measure_end_qn)
+  local trailing_measure_end_time, _, _, _, _, _= reaper.TimeMap_GetMeasureInfo(project_id, measure_number)
+  local trailing_measure_length = trailing_measure_end_time - new_measure_end_time
+  if trailing_measure_length == 0 then
+    abort("Invalid time range selection")
   end
 
-  local leadingMeasureTempo = 240 / leadingMeasureLength / (leadingMeasureBasis / leadingMeasureQns)
-  if not dryRun then
-    if not reaper.SetTempoTimeSigMarker(projectId, -1, leadingMeasureStartTime, -1, -1, leadingMeasureTempo, leadingMeasureQns, leadingMeasureBasis, 0) then
-      fatalError("SetTempoTimeSigMarker failed")
+  local leading_measure_tempo = 240 / leading_measure_length / (leading_measure_basis / leading_measure_qns)
+  if not dry_run then
+    if not reaper.SetTempoTimeSigMarker(project_id, -1, leading_measure_start_time, -1, -1, leading_measure_tempo, leading_measure_qns, leading_measure_basis, 0) then
+      abort("SetTempoTimeSigMarker failed")
     end
   end
 
-  local newMeasureTempo = 240 / newMeasureLength / (newMeasureBasis / newMeasureQns)
-  if not dryRun then
-    if not reaper.SetTempoTimeSigMarker(projectId, -1, newMeasureStartTime, -1, -1, newMeasureTempo, newMeasureQns, newMeasureBasis, 0) then
-      fatalError("SetTempoTimeSigMarker failed")
+  local new_measure_tempo = 240 / new_measure_length / (new_measure_basis / new_measure_qns)
+  if not dry_run then
+    if not reaper.SetTempoTimeSigMarker(project_id, -1, new_measure_start_time, -1, -1, new_measure_tempo, new_measure_qns, new_measure_basis, 0) then
+      abort("SetTempoTimeSigMarker failed")
     end
   end
 
-  local trailingMeasureTempo = 240 / trailingMeasureLength / (trailingMeasureBasis / trailingMeasureQns)
-  if not dryRun then
-    if not reaper.SetTempoTimeSigMarker(projectId, -1, newMeasureEndTime, -1, -1, trailingMeasureTempo, trailingMeasureQns, trailingMeasureBasis, 0) then
-      fatalError("SetTempoTimeSigMarker failed")
+  local trailing_measure_tempo = 240 / trailing_measure_length / (trailing_measure_basis / trailing_measure_qns)
+  if not dry_run then
+    if not reaper.SetTempoTimeSigMarker(project_id, -1, new_measure_end_time, -1, -1, trailing_measure_tempo, trailing_measure_qns, trailing_measure_basis, 0) then
+      abort("SetTempoTimeSigMarker failed")
     end
   end
 
-  if not dryRun then
-    if not reaper.SetTempoTimeSigMarker(projectId, -1, trailingMeasureEndTime, -1, -1, originalTempo, originalTimeSigNum, originalTimeSigDenom, 0) then
-      fatalError("SetTempoTimeSigMarker failed")
+  if not dry_run then
+    if not reaper.SetTempoTimeSigMarker(project_id, -1, trailing_measure_end_time, -1, -1, original_tempo, original_time_sig_num, original_time_sig_denom, 0) then
+      abort("SetTempoTimeSigMarker failed")
     end
   end
 end
 
 local function main()
-  local projectId = 0
-  local leadingMeasureBasis = 4
-  local newMeasureBasis = 4
-  local trailingMeasureBasis = 4
-  local dryRun = false
+  local PROJECT_ID = 0
+  local LEADING_MEASURE_BASIS = 4
+  local NEW_MEASURE_BASIS = 4
+  local TRAILING_MEASURE_BASIS = 4
+  local DRY_RUN = false
 
-  if reaper.SNM_GetIntConfigVarEx(projectId, "itemtimelock", -100) ~= 0 then
-    userError("Timebase for items/envelopes/markers must be set to \"Time\"")
+  if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "itemtimelock", -100) ~= 0 then
+    show_user_error("Timebase for items/envelopes/markers must be set to \"Time\"")
     return false
   end
 
-  if reaper.SNM_GetIntConfigVarEx(projectId, "tempoenvtimelock", -100) ~=0 then
-    userError("Timebase for tempo/time signature envelope must be set to \"Time\"")
+  if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "tempoenvtimelock", -100) ~=0 then
+    show_user_error("Timebase for tempo/time signature envelope must be set to \"Time\"")
     return false
   end
 
-  local newMeasureStartTime, newMeasureEndTime = reaper.GetSet_LoopTimeRange2(projectId, false, false, 0, 0, false)
-  local newMeasureLength = newMeasureEndTime - newMeasureStartTime
-  if newMeasureLength == 0 then
-    userError("Selected time range is empty")
+  local new_measure_start_time, new_measure_end_time = reaper.GetSet_LoopTimeRange2(PROJECT_ID, false, false, 0, 0, false)
+  local new_measure_length = new_measure_end_time - new_measure_start_time
+  if new_measure_length == 0 then
+    show_user_error("Selected time range is empty")
     return false
   end
 
-  local markerCount = reaper.CountTempoTimeSigMarkers(projectId)
-  for i = 0, markerCount - 1 do
-    local status, markerTime = reaper.GetTempoTimeSigMarker(projectId, i)
+  local marker_count = reaper.CountTempoTimeSigMarkers(PROJECT_ID)
+  for i = 0, marker_count - 1 do
+    local status, marker_time = reaper.GetTempoTimeSigMarker(PROJECT_ID, i)
     if not status then
-      fatalError("GetTempoTimeSigMarker failed")
+      abort("GetTempoTimeSigMarker failed")
     end
 
-    if markerTime >= newMeasureStartTime and markerTime <= newMeasureEndTime then
-      userError("Selected time range already contains one or more tempo/time signature markers")
+    if marker_time >= new_measure_start_time and marker_time <= new_measure_end_time then
+      show_user_error("Selected time range already contains one or more tempo/time signature markers")
       return false
     end
   end
 
-  local status, leadingMeasureQnsStr, newMeasureQnsStr, trailingMeasureQnsStr = getUserInputs("CreateSingleMeasure", {{"Beats in leading measure", 4}, {"Beats in new measure", 4}, {"Beats in trailing measure", 4}})
+  local status, leading_measure_qns_str, new_measure_qns_str, trailing_measure_qns_str = get_user_inputs(SCRIPT_TITLE, {{"Beats in leading measure", 4}, {"Beats in new measure", 4}, {"Beats in trailing measure", 4}})
   if not status then
     -- Operation cancelled
     return false
   end
 
-  local leadingMeasureQns = tonumber(leadingMeasureQnsStr)
-  local newMeasureQns = tonumber(newMeasureQnsStr)
-  local trailingMeasureQns = tonumber(trailingMeasureQnsStr)
+  local leading_measure_qns = tonumber(leading_measure_qns_str)
+  local new_measure_qns = tonumber(new_measure_qns_str)
+  local trailing_measure_qns = tonumber(trailing_measure_qns_str)
 
-  createSingleMeasure(
-    projectId,
-    leadingMeasureQns,
-    leadingMeasureBasis,
-    newMeasureQns,
-    newMeasureBasis,
-    trailingMeasureQns,
-    trailingMeasureBasis,
-    dryRun)
+  create_single_measure(
+    PROJECT_ID,
+    leading_measure_qns,
+    LEADING_MEASURE_BASIS,
+    new_measure_qns,
+    NEW_MEASURE_BASIS,
+    trailing_measure_qns,
+    TRAILING_MEASURE_BASIS,
+    DRY_RUN)
 
   reaper.UpdateTimeline()
   return true
 end
 
 main()
-
