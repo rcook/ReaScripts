@@ -1,5 +1,12 @@
-local SCRIPT_TITLE = "CreateSingleMeasure"
+--[[
+   * ReaScript Name: Create Single Measure
+   * Author: Richard Cook
+   * Author URI: https://github.com/rcook/reaper-lua.git
+   * Licence: MIT
+   * Version: 0.1
+--]]
 
+local SCRIPT_TITLE = "Create Single Measure"
 
 local function print(param)
   reaper.ShowConsoleMsg("[" .. tostring(reaper.time_precise()) .. "] " .. tostring(param) .. "\n")
