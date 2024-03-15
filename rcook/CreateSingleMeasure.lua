@@ -56,7 +56,7 @@ local function createSingleMeasure(
   -- Measure immediately before selection
   -- Measure starts at leadingMeasureStartTime and ends at newMeasureStartTime
   local measureNumber = reaper.TimeMap_QNToMeasures(projectId, newMeasureStartQn)
-  local leadingMeasureStartTime, startQn, endQn, timeSigNum, timeSigDenom, tempo = reaper.TimeMap_GetMeasureInfo(projectId, measureNumber - 1)
+  local leadingMeasureStartTime, _, _, originalTimeSigNum, originalTimeSigDenom, originalTempo = reaper.TimeMap_GetMeasureInfo(projectId, measureNumber - 1)
   local leadingMeasureLength = newMeasureStartTime - leadingMeasureStartTime
   if leadingMeasureLength == 0 then
     error("Invalid selection (no leading)")
@@ -65,7 +65,7 @@ local function createSingleMeasure(
   -- Measure immediately after selection
   -- Measure starts at newMeasureEndTime and ends at trailingMeasureEndTime
   local measureNumber = reaper.TimeMap_QNToMeasures(projectId, newMeasureEndQn)
-  local trailingMeasureEndTime, startQn, endQn, timeSigNum, timeSigDenom, temp = reaper.TimeMap_GetMeasureInfo(projectId, measureNumber)
+  local trailingMeasureEndTime, _, _, _, _, _= reaper.TimeMap_GetMeasureInfo(projectId, measureNumber)
   local trailingMeasureLength = trailingMeasureEndTime - newMeasureEndTime
   if trailingMeasureLength == 0 then
     error("Invalid selection (no trailing)")
@@ -88,6 +88,12 @@ local function createSingleMeasure(
   local trailingMeasureTempo = 240 / trailingMeasureLength / (trailingMeasureBasis / trailingMeasureQns)
   if not dryRun then
     if not reaper.SetTempoTimeSigMarker(projectId, -1, newMeasureEndTime, -1, -1, trailingMeasureTempo, trailingMeasureQns, trailingMeasureBasis, 0) then
+      error("SetTempoTimeSigMarker failed")
+    end
+  end
+
+  if not dryRun then
+    if not reaper.SetTempoTimeSigMarker(projectId, -1, trailingMeasureEndTime, -1, -1, originalTempo, originalTimeSigNum, originalTimeSigDenom, 0) then
       error("SetTempoTimeSigMarker failed")
     end
   end
