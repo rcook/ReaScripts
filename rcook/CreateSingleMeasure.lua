@@ -95,13 +95,10 @@ end
 
 local function main()
   local projectId = 0
-  local leadingMeasureQns = 1
   local leadingMeasureBasis = 4
-  local newMeasureQns = 4
   local newMeasureBasis = 4
-  local trailingMeasureQns = 3
   local trailingMeasureBasis = 4
-  local dryRun = true
+  local dryRun = false
 
   if reaper.SNM_GetIntConfigVarEx(projectId, "itemtimelock", -100) ~= 0 then
     error("Timebase for items/envelopes/markers must set to \"Time\"")
@@ -111,10 +108,14 @@ local function main()
     error("Timebase for tempo/time signature envelope must be set to \"Time\"")
   end
 
-  local status, a, b = getUserInputs("TITLE", {{"AAA", "one"}, {"BBB", "two"}})
+  local status, leadingMeasureQnsStr, newMeasureQnsStr, trailingMeasureQnsStr = getUserInputs("TITLE", {{"Beats in leading measure", 4}, {"Beats in new measure", 4}, {"Beats in trailing measure", 4}})
   if not status then
     return
   end
+
+  local leadingMeasureQns = tonumber(leadingMeasureQnsStr)
+  local newMeasureQns = tonumber(newMeasureQnsStr)
+  local trailingMeasureQns = tonumber(trailingMeasureQnsStr)
 
   createSingleMeasure(
     projectId,
