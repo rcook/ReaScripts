@@ -81,7 +81,7 @@ local function main()
   local TRAILING_MEASURE_BASIS = 4
   local DRY_RUN = false
 
-  dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rcook_Lib.lua")
+  dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
   require_snm_sws()
 
   if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "itemtimelock", -100) ~= 0 then
