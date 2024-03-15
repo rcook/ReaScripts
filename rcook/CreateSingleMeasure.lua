@@ -6,8 +6,10 @@
    * Version: 0.1
 --]]
 
--- Global
+-- Standard preamble
 SCRIPT_TITLE = "Create Single Measure"
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
+lib_init()
 
 local function create_single_measure(
   project_id,
@@ -80,9 +82,6 @@ local function main()
   local NEW_MEASURE_BASIS = 4
   local TRAILING_MEASURE_BASIS = 4
   local DRY_RUN = false
-
-  dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
-  require_snm_sws()
 
   if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "itemtimelock", -100) ~= 0 then
     message("Timebase for items/envelopes/markers must be set to \"Time\"")

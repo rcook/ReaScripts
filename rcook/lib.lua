@@ -1,4 +1,4 @@
-function require_snm_sws()
+function lib_init()
   if not reaper.APIExists("SNM_GetIntConfigVarEx") then
     exit("Please install a recent version of SWS/S&M (https://www.sws-extension.org)")
   end
