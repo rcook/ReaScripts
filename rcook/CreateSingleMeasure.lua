@@ -80,6 +80,14 @@ trailingMeasureQns = 3
 trailingMeasureBasis = 4
 dryRun = true
 
+if reaper.SNM_GetIntConfigVarEx(projectId, "itemtimelock", -100) ~= 0 then
+  error("Timebase for items/envelopes/markers must set to \"Time\"")
+end
+
+if reaper.SNM_GetIntConfigVarEx(projectId, "tempoenvtimelock", -100) ~=0 then
+  error("Timebase for tempo/time signature envelope must be set to \"Time\"")
+end
+
 createSingleMeasure(
   projectId,
   leadingMeasureQns,
