@@ -6,48 +6,8 @@
    * Version: 0.1
 --]]
 
-local SCRIPT_TITLE = "Create Single Measure"
-
-local function print(param)
-  reaper.ShowConsoleMsg("[" .. tostring(reaper.time_precise()) .. "] " .. tostring(param) .. "\n")
-end
-
-local function show_user_error(param)
-  local s = tostring(param)
-  reaper.ShowMessageBox(s, SCRIPT_TITLE, 0)
-end
-
-local function abort(param)
-  local s = tostring(param)
-  reaper.ShowMessageBox("Error: " .. s, SCRIPT_TITLE, 0)
-  reaper.ReaScriptError("!" .. s)
-end
-
-local function format_time(pos)
-  return reaper.format_timestr_pos(pos, "", -1)
-end
-
-local function get_user_inputs(title, inputs)
-  local captions_csv = ""
-  local values_csv = ""
-  local results_regex = ""
-  for i, p in ipairs(inputs) do
-    if i > 1 then
-      captions_csv = captions_csv .. ","
-      values_csv = values_csv .. ","
-      results_regex = results_regex .. ","
-    end
-    captions_csv = captions_csv .. p[1]
-    values_csv = values_csv .. p[2]
-    results_regex = results_regex .. "([^,]+)"
-  end
-  local status, results_csv = reaper.GetUserInputs(title, #inputs, captions_csv, values_csv)
-  if status then
-    return true, results_csv:match(results_regex)
-  else
-    return false, nil
-  end
-end
+-- Global
+SCRIPT_TITLE = "Create Single Measure"
 
 local function create_single_measure(
   project_id,
@@ -121,20 +81,23 @@ local function main()
   local TRAILING_MEASURE_BASIS = 4
   local DRY_RUN = false
 
+  dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rcook_Lib.lua")
+  require_snm_sws()
+
   if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "itemtimelock", -100) ~= 0 then
-    show_user_error("Timebase for items/envelopes/markers must be set to \"Time\"")
+    message("Timebase for items/envelopes/markers must be set to \"Time\"")
     return false
   end
 
   if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "tempoenvtimelock", -100) ~=0 then
-    show_user_error("Timebase for tempo/time signature envelope must be set to \"Time\"")
+    message("Timebase for tempo/time signature envelope must be set to \"Time\"")
     return false
   end
 
   local new_measure_start_time, new_measure_end_time = reaper.GetSet_LoopTimeRange2(PROJECT_ID, false, false, 0, 0, false)
   local new_measure_length = new_measure_end_time - new_measure_start_time
   if new_measure_length == 0 then
-    show_user_error("Selected time range is empty")
+    message("Selected time range is empty")
     return false
   end
 
@@ -146,7 +109,7 @@ local function main()
     end
 
     if marker_time >= new_measure_start_time and marker_time <= new_measure_end_time then
-      show_user_error("Selected time range already contains one or more tempo/time signature markers")
+      message("Selected time range already contains one or more tempo/time signature markers")
       return false
     end
   end
