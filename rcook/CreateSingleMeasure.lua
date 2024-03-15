@@ -114,7 +114,7 @@ local function main()
     end
   end
 
-  local status, leading_measure_qns_str, new_measure_qns_str, trailing_measure_qns_str = get_user_inputs(SCRIPT_TITLE, {{"Beats in leading measure", 4}, {"Beats in new measure", 4}, {"Beats in trailing measure", 4}})
+  local status, leading_measure_qns_str, new_measure_qns_str, trailing_measure_qns_str = get_user_inputs({{"Beats in leading measure", 4}, {"Beats in new measure", 4}, {"Beats in trailing measure", 4}})
   if not status then
     -- Operation cancelled
     return false

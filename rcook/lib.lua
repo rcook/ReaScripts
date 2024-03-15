@@ -28,7 +28,7 @@ function format_time(pos)
   return reaper.format_timestr_pos(pos, "", -1)
 end
 
-function get_user_inputs(title, inputs)
+function get_user_inputs(inputs)
   local captions_csv = ""
   local values_csv = ""
   local results_regex = ""
@@ -42,7 +42,7 @@ function get_user_inputs(title, inputs)
     values_csv = values_csv .. p[2]
     results_regex = results_regex .. "([^,]+)"
   end
-  local status, results_csv = reaper.GetUserInputs(title, #inputs, captions_csv, values_csv)
+  local status, results_csv = reaper.GetUserInputs(SCRIPT_TITLE, #inputs, captions_csv, values_csv)
   if status then
     return true, results_csv:match(results_regex)
   else
