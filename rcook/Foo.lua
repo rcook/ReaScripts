@@ -48,7 +48,7 @@ end
 
 local function main()
   local PROJECT_ID = 0
-  local TIME_SIG_NUM = 4
+  local TIME_SIG_NUM = 3
   local TIME_SIG_DENOM = 4
 
   delete_all_tempo_time_sig_markers(PROJECT_ID)  
