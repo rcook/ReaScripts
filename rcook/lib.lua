@@ -46,7 +46,9 @@ function run(main)
 
   local status, result = xpcall(main, on_terminated)
   if not status and result ~= nil then
-    reaper.ReaScriptError("!" .. tostring(result))
+    local s = tostring(result)
+    trace("[ERROR] " .. s)
+    reaper.ReaScriptError("!" .. s)
   else
     return result
   end
