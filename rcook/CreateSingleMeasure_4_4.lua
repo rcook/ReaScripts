@@ -7,6 +7,4 @@
 --]]
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
-dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "utils.lua")
-init_lib("Create Single Measure")
-run(run_create_single_measure_action)
+run("Create Single Measure", run_create_single_measure_action)

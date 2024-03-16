@@ -8,12 +8,35 @@
 local EXIT_MARKER = "[EXIT]"
 local SCRIPT_TITLE = nil
 
-function init_lib(script_title)
+function run(title, main)
+  local function on_terminated(e)
+    local s = tostring(e)
+    if s:sub(-#EXIT_MARKER) == EXIT_MARKER then
+      return
+    else
+      return e
+    end
+  end
+
+  SCRIPT_TITLE = title
+
   if not reaper.APIExists("SNM_GetIntConfigVarEx") then
     exit("Please install a recent version of SWS/S&M (https://www.sws-extension.org)")
   end
 
-  SCRIPT_TITLE = script_title
+  local ctx = {
+    project_id = 0,
+    script_path = (({reaper.get_action_context()})[2])
+  }
+
+  local status, result = xpcall(main, on_terminated, ctx)
+  if not status and result ~= nil then
+    local s = tostring(result)
+    trace("[ERROR] " .. s)
+    reaper.ReaScriptError("!" .. s)
+  else
+    return result
+  end
 end
 
 function message(obj)
@@ -36,26 +59,6 @@ end
 
 function abort(obj)
   error(tostring(obj))
-end
-
-function run(main)
-  function on_terminated(e)
-    local s = tostring(e)
-    if s:sub(-#EXIT_MARKER) == EXIT_MARKER then
-      return
-    else
-      return e
-    end
-  end
-
-  local status, result = xpcall(main, on_terminated)
-  if not status and result ~= nil then
-    local s = tostring(result)
-    trace("[ERROR] " .. s)
-    reaper.ReaScriptError("!" .. s)
-  else
-    return result
-  end
 end
 
 function ensure_absolute_project_timebases(project_id)
@@ -103,22 +106,19 @@ function run_action_command(project_id, command_name)
   reaper.Main_OnCommandEx(command_id, 0, project_id)
 end
 
-function parse_user_integer(t)
-  setmetatable(t, {__index = { label = nil, validator = nil } })
+function parse_user_integer(s, label, validator)
+  local label = label == nil and "Value" or label
 
-  local s = t[1]
-  local label = t.label == nil and "Value" or t.label
   local value = math.tointeger(s)
-
   if value == nil then
     exit(label .. " \"" .. s .. "\" must be an integer")
   end
 
-  if t.validator == nil then
+  if validator == nil then
     return value
   end
 
-  if t.validator(value) then
+  if validator(value) then
     return value
   end
 
@@ -127,4 +127,89 @@ end
 
 function confirm(s)
   return reaper.ShowMessageBox(s, SCRIPT_TITLE, 1) == 1
+end
+
+function delete_all_tempo_time_sig_markers(project_id)
+  for i = reaper.CountTempoTimeSigMarkers(project_id) - 1, 0, -1 do
+    local status, _, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
+    if not status then
+      abort("GetTempoTimeSigMarker failed")
+    end
+    if not reaper.DeleteTempoTimeSigMarker(project_id, i) then
+      abort("DeleteTempoTimeSigMarker failed")
+    end
+  end
+end
+
+function get_tempo_time_sig_marker(project_id, time)
+  for i = 0, reaper.CountTempoTimeSigMarkers(project_id) - 1 do
+    status, marker_time, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
+    if not status then
+      abort("GetTempoTimeSigMarker failed")
+    end
+
+    if marker_time == time then
+      return { marker_id = i, is_fuzzy = false }
+    end
+
+    if format_time(marker_time) == format_time(time) then
+      return { marker_id = i, is_fuzzy = true }
+    end
+
+  end
+  return nil
+end
+
+function create_single_measure_tempo_time_sig_marker(project_id, start_time, end_time, time_sig_num, time_sig_denom)
+  assert(end_time > start_time)
+  assert(time_sig_num > 0)
+  assert(time_sig_denom > 0)
+
+  local len = end_time - start_time
+  local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)
+  local end_qn  = reaper.TimeMap2_timeToQN(project_id, end_time)
+  local tempo = 240.0 / len / (time_sig_denom / time_sig_num)
+
+  local result = get_tempo_time_sig_marker(project_id, start_time)
+  if result ~= nil then
+    if result.is_fuzzy then
+      if not confirm("There is a tempo/time signature marker nearby: continue?") then
+        exit()
+      end
+    end
+
+    if not reaper.DeleteTempoTimeSigMarker(project_id, result.marker_id) then
+      abort("DeleteTempoTimeSigMarker failed")
+    end
+  end
+
+  if not reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0) then
+    abort("SetTempoTimeSigMarker failed")
+  end
+end
+
+function run_create_single_measure_action(ctx, time_sig_num, time_sig_denom)
+  local time_sig_num_str, time_sig_denom_str = ctx.script_path:match("CreateSingleMeasure_(%d+)_(%d+)")
+
+  if time_sig_num == nil then
+    time_sig_num = math.tointeger(time_sig_num_str)
+  end
+  if time_sig_denom == nil then
+    time_sig_denom = math.tointeger(time_sig_denom_str)
+  end
+
+  local start_time, end_time = reaper.GetSet_LoopTimeRange2(ctx.project_id, false, false, 0, 0, false)
+  local len = end_time - start_time
+  if len == 0 then
+    exit("Selected time range is empty")
+  end
+
+  create_single_measure_tempo_time_sig_marker(
+    ctx.project_id,
+    start_time,
+    end_time,
+    time_sig_num,
+    time_sig_denom)
+
+  reaper.UpdateTimeline()
 end

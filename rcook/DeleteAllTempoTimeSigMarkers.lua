@@ -7,14 +7,11 @@
 --]]
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
-dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "utils.lua")
-init_lib("Delete All Tempo and Time Signature Markers")
 
-local function main()
-  local PROJECT_ID = 0
-  delete_all_tempo_time_sig_markers(PROJECT_ID)  
+local function main(ctx)
+  delete_all_tempo_time_sig_markers(ctx.project_id)
   reaper.UpdateTimeline()
   message("All tempo and time signature markers successfully deleted")
 end
 
-run(main)
+run("Delete All Tempo and Time Signature Markers", main)
