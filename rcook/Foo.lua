@@ -29,8 +29,7 @@ local function create_measure(project_id, start_time, end_time, time_sig_num, ti
   local len = end_time - start_time
   local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)
   local end_qn  = reaper.TimeMap2_timeToQN(project_id, end_time)
-
-  local tempo = 240 / len / (time_sig_denom / time_sig_num)
+  local tempo = 240.0 / len / (time_sig_denom / time_sig_num)
 
   if not reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0) then
     abort("SetTempoTimeSigMarker failed")
