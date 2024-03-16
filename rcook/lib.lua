@@ -25,9 +25,13 @@ function trace(obj)
 end
 
 function exit(obj)
-  local s = tostring(obj)
-  message(s)
-  error(s .. EXIT_MARKER)
+  if obj == nil then
+    error(EXIT_MARKER)
+  else
+    local s = tostring(obj)
+    message(s)
+    error(s .. EXIT_MARKER)
+  end
 end
 
 function abort(obj)
@@ -97,4 +101,30 @@ function run_action_command(project_id, command_name)
   end
 
   reaper.Main_OnCommandEx(command_id, 0, project_id)
+end
+
+function parse_user_integer(t)
+  setmetatable(t, {__index = { label = nil, validator = nil } })
+
+  local s = t[1]
+  local label = t.label == nil and "Value" or t.label
+  local value = math.tointeger(s)
+
+  if value == nil then
+    exit(label .. " \"" .. s .. "\" must be an integer")
+  end
+
+  if t.validator == nil then
+    return value
+  end
+
+  if t.validator(value) then
+    return value
+  end
+
+  exit(label .. " \"" .. s .. "\" is not valid")
+end
+
+function confirm(s)
+  return reaper.ShowMessageBox(s, SCRIPT_TITLE, 1) == 1
 end
