@@ -14,13 +14,14 @@ local function foo(project_id)
   local new_measure_length = new_measure_end_time - new_measure_start_time
   if new_measure_length == 0 then
     exit("Selected time range is empty")
-    return false
   end
 end
 
 
 local function main()
-  run_action_command(0, "FOO")
+  local PROJECT_ID = 0
+  foo(PROJECT_ID)
 end
 
 run(main)
+
