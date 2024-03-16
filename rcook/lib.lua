@@ -4,6 +4,16 @@ function lib_init()
   end
 end
 
+function ensure_absolute_project_timebases(project_id)
+  if reaper.SNM_GetIntConfigVarEx(project_id, "itemtimelock", -100) ~= 0 then
+    exit("Timebase for items/envelopes/markers must be set to \"Time\"")
+  end
+
+  if reaper.SNM_GetIntConfigVarEx(project_id, "tempoenvtimelock", -100) ~=0 then
+    exit("Timebase for tempo/time signature envelope must be set to \"Time\"")
+  end
+end
+
 function trace(obj)
   reaper.ShowConsoleMsg("[" .. tostring(reaper.time_precise()) .. "] " .. tostring(obj) .. "\n")
 end
@@ -48,4 +58,13 @@ function get_user_inputs(inputs)
   else
     return false, nil
   end
+end
+
+function run_action_command(project_id, command_name)
+  local command_id = reaper.NamedCommandLookup(command_name, 0, project_id)
+  if command_id == 0 then
+    abort("NamedCommandLookup failed")
+  end
+
+  reaper.Main_OnCommandEx(command_id, 0, project_id)
 end

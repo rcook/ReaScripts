@@ -83,15 +83,7 @@ local function main()
   local TRAILING_MEASURE_BASIS = 4
   local DRY_RUN = false
 
-  if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "itemtimelock", -100) ~= 0 then
-    message("Timebase for items/envelopes/markers must be set to \"Time\"")
-    return false
-  end
-
-  if reaper.SNM_GetIntConfigVarEx(PROJECT_ID, "tempoenvtimelock", -100) ~=0 then
-    message("Timebase for tempo/time signature envelope must be set to \"Time\"")
-    return false
-  end
+  ensure_absolute_project_timebases(PROJECT_ID)
 
   local new_measure_start_time, new_measure_end_time = reaper.GetSet_LoopTimeRange2(PROJECT_ID, false, false, 0, 0, false)
   local new_measure_length = new_measure_end_time - new_measure_start_time
