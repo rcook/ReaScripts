@@ -31,3 +31,27 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
     abort("SetTempoTimeSigMarker failed")
   end
 end
+
+
+function run_create_single_measure_action()
+  local PROJECT_ID = 0
+  local s = (({reaper.get_action_context()})[2])
+  local time_sig_num_str, time_sig_denom_str = s:match('CreateSingleMeasure_(%d+)_(%d+)')
+  local time_sig_num = tonumber(time_sig_num_str)
+  local time_sig_denom = tonumber(time_sig_denom_str)
+
+  local start_time, end_time = reaper.GetSet_LoopTimeRange2(PROJECT_ID, false, false, 0, 0, false)
+  local len = end_time - start_time
+  if len == 0 then
+    exit("Selected time range is empty")
+  end
+
+  create_single_measure_tempo_time_sig_marker(
+    PROJECT_ID,
+    start_time,
+    end_time,
+    time_sig_num,
+    time_sig_denom)
+
+  reaper.UpdateTimeline()
+end
