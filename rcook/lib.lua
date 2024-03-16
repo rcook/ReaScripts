@@ -89,6 +89,7 @@ function get_user_inputs(inputs)
     values_csv = values_csv .. p[2]
     results_regex = results_regex .. "([^,]+)"
   end
+
   local status, results_csv = reaper.GetUserInputs(SCRIPT_TITLE, #inputs, captions_csv, values_csv)
   if status then
     return true, results_csv:match(results_regex)
