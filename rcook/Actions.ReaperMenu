@@ -1,0 +1,14 @@
+[Main actions]
+item_0=-2 Tempo mapping
+item_1=_RS86fb0044a79a2aa29026073066c1a12709d7be23 Create single measure
+item_2=_RSbda51544d5c770a0eaf3527951745c5de4c0e2b5 Create single measure 1/4
+item_3=_RSe24151174d9fe831d9b15430815d19f826c3f90d Create single measure 2/4
+item_4=_RS20b7ae1c8b0e818a944e674f10919e713eb3c9cd Create single measure 3/4
+item_5=_RS1758bfc6a06d108237b4b2c7e6e089d942fd5f1d Create single measure 4/4
+item_6=_RS3008846e53c4569c15ddc7c3940a873f264fc92d Create single measure 5/4
+item_7=_RS6169bfbb78aaa1c7089cd1813b60418905f1c9e5 Create single measure 6/8
+item_8=_RS90a16b15f868f5fcbbfb740e8cb9cad1c68283b7 Delete all tempo/time signature markers
+item_9=_RS4b54202f4d392692207db4839cec36584a981fc1 Set project absolute timebases
+item_10=-3
+item_11=-1
+item_12=1528 Customize...
