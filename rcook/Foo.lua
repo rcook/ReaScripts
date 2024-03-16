@@ -7,54 +7,37 @@
 --]]
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "utils.lua")
 init_lib("Foo")
-
-local function delete_all_tempo_time_sig_markers(project_id)
-  for i = reaper.CountTempoTimeSigMarkers(project_id) - 1, 0, -1 do
-    status, _, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
-    if not status then
-      abort("GetTempoTimeSigMarker failed")
-    end
-    if not reaper.DeleteTempoTimeSigMarker(project_id, i) then
-      abort("DeleteTempoTimeSigMarker failed")
-    end
-  end
-end
-
-local function create_measure(project_id, start_time, end_time, time_sig_num, time_sig_denom)
-  assert(end_time > start_time)
-  assert(time_sig_num > 0)
-  assert(time_sig_denom > 0)
-
-  local len = end_time - start_time
-  local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)
-  local end_qn  = reaper.TimeMap2_timeToQN(project_id, end_time)
-  local tempo = 240.0 / len / (time_sig_denom / time_sig_num)
-
-  if not reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0) then
-    abort("SetTempoTimeSigMarker failed")
-  end
-end
-
-local function foo(project_id, time_sig_num, time_sig_denom)
-  local start_time, end_time = reaper.GetSet_LoopTimeRange2(project_id, false, false, 0, 0, false)
-  local len = end_time - start_time
-  if len == 0 then
-    exit("Selected time range is empty")
-  end
-
-  create_measure(project_id, start_time, end_time, time_sig_num, time_sig_denom)
-end
 
 local function main()
   local PROJECT_ID = 0
   local TIME_SIG_NUM = 3
   local TIME_SIG_DENOM = 4
 
+  local s = ({reaper.get_action_context()})[2]
+  local s = "/path/to/CreateSingleMeasure_1_4.lua"
+
+  local time_sig_num_str, time_sig_denom_str = s:match('CreateSingleMeasure_(%d+)_(%d+)')
+  local time_sig_num = tonumber(time_sig_num_str)
+  local time_sig_denom = tonumber(time_sig_denom_str)
+  exit(tostring(time_sig_num) .. " | " .. tostring(time_sig_denom))
   delete_all_tempo_time_sig_markers(PROJECT_ID)  
-  foo(PROJECT_ID, TIME_SIG_NUM, TIME_SIG_DENOM)
+
+  local start_time, end_time = reaper.GetSet_LoopTimeRange2(PROJECT_ID, false, false, 0, 0, false)
+  local len = end_time - start_time
+  if len == 0 then
+    exit("Selected time range is empty")
+  end
+
+  create_single_measure_tempo_time_sig_marker(
+    PROJECT_ID,
+    start_time,
+    end_time,
+    TIME_SIG_NUM,
+    TIME_SIG_DENOM)
+
   reaper.UpdateTimeline()
 end
 
 run(main)
-

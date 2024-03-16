@@ -6,27 +6,25 @@
    * Version: 0.0
 --]]
 
--- Standard preamble
-SCRIPT_TITLE = "Set Project Absolute Timebases"
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
-lib_init()
-
-local function set_project_absolute_timebases(project_id)
-  if not reaper.SNM_SetIntConfigVarEx(project_id, "itemtimelock", 0) then
-    abort("SNM_SetIntConfigVarEx failed")
-  end
-  if not reaper.SNM_SetIntConfigVarEx(project_id, "tempoenvtimelock", 0) then
-    abort("SNM_SetIntConfigVarEx failed")
-  end
-
-  reaper.SelectAllMediaItems(project_id, true)
-  run_action_command(project_id, "_BR_MIDI_PROJ_TEMPO_ENB_TIME")
-end
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "utils.lua")
+init_lib("Set Project Absolute Timebases")
 
 local function main()
   local PROJECT_ID = 0
-  set_project_absolute_timebases(PROJECT_ID)
+
+  if not reaper.SNM_SetIntConfigVarEx(PROJECT_ID, "itemtimelock", 0) then
+    abort("SNM_SetIntConfigVarEx failed")
+  end
+  if not reaper.SNM_SetIntConfigVarEx(PROJECT_ID, "tempoenvtimelock", 0) then
+    abort("SNM_SetIntConfigVarEx failed")
+  end
+
+  reaper.SelectAllMediaItems(PROJECT_ID, true)
+  run_action_command(PROJECT_ID, "_BR_MIDI_PROJ_TEMPO_ENB_TIME")
+
   message("Project timebases successfully set to absolute")
+  reaper.UpdateTimeline()
 end
 
-main()
+run(main)
