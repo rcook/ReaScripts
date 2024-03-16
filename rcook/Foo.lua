@@ -35,8 +35,6 @@ local function create_measure(project_id, start_time, end_time, time_sig_num, ti
   if not reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0) then
     abort("SetTempoTimeSigMarker failed")
   end
-
-  trace(tempo)
 end
 
 local function foo(project_id, time_sig_num, time_sig_denom)
@@ -55,7 +53,7 @@ local function main()
   local TIME_SIG_DENOM = 4
 
   delete_all_tempo_time_sig_markers(PROJECT_ID)  
-  --foo(PROJECT_ID, TIME_SIG_NUM, TIME_SIG_DENOM)
+  foo(PROJECT_ID, TIME_SIG_NUM, TIME_SIG_DENOM)
   reaper.UpdateTimeline()
 end
 
