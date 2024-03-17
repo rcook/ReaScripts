@@ -4,4 +4,4 @@ Released under [MIT License](LICENSE)
 
 ## Contents
 
-* [My scripts](rcook/README.md)
+* [rrt](rrt/README.md) (Richard's REAPER Tools)

@@ -1,6 +1,8 @@
-# Tempo mapping
+# rrt&emdash;Richard's REAPER tools
 
-## Keyboard shortcuts
+## Tempo mapping
+
+### Keyboard shortcuts
 
 | Shortcut         | Description                                  | Type   |
 | ---              | ---                                          | ---    |
