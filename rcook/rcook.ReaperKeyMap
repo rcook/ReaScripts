@@ -1,3 +1,4 @@
+# Tempo mapping actions
 SCR 4 0 RS86fb0044a79a2aa29026073066c1a12709d7be23 "Custom: CreateSingleMeasure.lua" rcook/CreateSingleMeasure.lua
 SCR 4 0 RSbda51544d5c770a0eaf3527951745c5de4c0e2b5 "Custom: CreateSingleMeasure_1_4.lua" rcook/CreateSingleMeasure_1_4.lua
 SCR 4 0 RSe24151174d9fe831d9b15430815d19f826c3f90d "Custom: CreateSingleMeasure_2_4.lua" rcook/CreateSingleMeasure_2_4.lua
@@ -7,10 +8,19 @@ SCR 4 0 RS3008846e53c4569c15ddc7c3940a873f264fc92d "Custom: CreateSingleMeasure_
 SCR 4 0 RS6169bfbb78aaa1c7089cd1813b60418905f1c9e5 "Custom: CreateSingleMeasure_6_8.lua" rcook/CreateSingleMeasure_6_8.lua
 SCR 4 0 RS90a16b15f868f5fcbbfb740e8cb9cad1c68283b7 "Custom: DeleteAllTempoTimeSigMarkers.lua" rcook/DeleteAllTempoTimeSigMarkers.lua
 SCR 4 0 RS4b54202f4d392692207db4839cec36584a981fc1 "Custom: SetProjectAbsoluteTimebases.lua" rcook/SetProjectAbsoluteTimebases.lua
-KEY 21 48 _RS86fb0044a79a2aa29026073066c1a12709d7be23 0
-KEY 21 49 _RSbda51544d5c770a0eaf3527951745c5de4c0e2b5 0
-KEY 21 50 _RSe24151174d9fe831d9b15430815d19f826c3f90d 0
-KEY 21 51 _RS20b7ae1c8b0e818a944e674f10919e713eb3c9cd 0
-KEY 21 52 _RS1758bfc6a06d108237b4b2c7e6e089d942fd5f1d 0
-KEY 21 53 _RS3008846e53c4569c15ddc7c3940a873f264fc92d 0
-KEY 21 54 _RS6169bfbb78aaa1c7089cd1813b60418905f1c9e5 0
+
+# Keyboard shortcuts for navigation
+KEY 13 219 41041 0		 # Main : Ctrl+Shift+[ : Move edit cursor to start of current measure
+KEY 13 221 41040 0		 # Main : Ctrl+Shift+] : Move edit cursor to start of next measure
+
+# Keyboard shortcuts for tempo mapping actions
+KEY 21 48 _RS86fb0044a79a2aa29026073066c1a12709d7be23 0		 # Main : Alt+Shift+0 : Script: CreateSingleMeasure.lua
+KEY 21 49 _RSbda51544d5c770a0eaf3527951745c5de4c0e2b5 0		 # Main : Alt+Shift+1 : Script: CreateSingleMeasure_1_4.lua
+KEY 21 50 _RSe24151174d9fe831d9b15430815d19f826c3f90d 0		 # Main : Alt+Shift+2 : Script: CreateSingleMeasure_2_4.lua
+KEY 21 51 _RS20b7ae1c8b0e818a944e674f10919e713eb3c9cd 0		 # Main : Alt+Shift+3 : Script: CreateSingleMeasure_3_4.lua
+KEY 21 52 _RS1758bfc6a06d108237b4b2c7e6e089d942fd5f1d 0		 # Main : Alt+Shift+4 : Script: CreateSingleMeasure_4_4.lua
+KEY 21 53 _RS3008846e53c4569c15ddc7c3940a873f264fc92d 0		 # Main : Alt+Shift+5 : Script: CreateSingleMeasure_5_4.lua
+KEY 21 54 _RS6169bfbb78aaa1c7089cd1813b60418905f1c9e5 0		 # Main : Alt+Shift+6 : Script: CreateSingleMeasure_6_8.lua
+
+# Other keyboard shortcuts
+KEY 29 77 40364 0		 # Main : Ctrl+Alt+Shift+M : Options: Toggle metronome
