@@ -114,9 +114,7 @@ function check_absolute_project_timebases(project_id)
       s = reaper.SNM_GetFastString(fs)
     end
     reaper.SNM_DeleteFastString(fs)
-    if not status then
-      abort("SNM_GetSetObjectState failed")
-    end
+    assert(status)
     return s
   end
   --[[
@@ -133,8 +131,8 @@ function check_absolute_project_timebases(project_id)
     if is_midi_media_item(media_item) then
       --local s = get_media_item_state(media_item)
       local status, str = reaper.GetItemStateChunk(media_item, "", true)
-      --trace(s:match("IGNTEMPO (%d)"))
-      trace(str)
+      assert(status)
+      trace(str:match("IGNTEMPO (%d)"))
     end
   end
   exit("NOTIMPL")
@@ -202,21 +200,16 @@ end
 function delete_all_tempo_time_sig_markers(project_id)
   for i = reaper.CountTempoTimeSigMarkers(project_id) - 1, 0, -1 do
     local status, _, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
-    if not status then
-      abort("GetTempoTimeSigMarker failed")
-    end
-    if not reaper.DeleteTempoTimeSigMarker(project_id, i) then
-      abort("DeleteTempoTimeSigMarker failed")
-    end
+    assert(status)
+    local status = reaper.DeleteTempoTimeSigMarker(project_id, i)
+    assert(status)
   end
 end
 
 function get_tempo_time_sig_marker(project_id, time)
   for i = 0, reaper.CountTempoTimeSigMarkers(project_id) - 1 do
-    status, marker_time, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
-    if not status then
-      abort("GetTempoTimeSigMarker failed")
-    end
+    local status, marker_time, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
+    assert(status)
 
     if marker_time == time then
       return { marker_id = i, is_fuzzy = false }
@@ -255,14 +248,12 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
       end
     end
 
-    if not reaper.DeleteTempoTimeSigMarker(project_id, result.marker_id) then
-      abort("DeleteTempoTimeSigMarker failed")
-    end
+    local status = reaper.DeleteTempoTimeSigMarker(project_id, result.marker_id)
+    assert(status)
   end
 
-  if not reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0) then
-    abort("SetTempoTimeSigMarker failed")
-  end
+  local status = reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0)
+  assert(status)
 end
 
 function run_create_single_measure_action(ctx, time_sig_num, time_sig_denom)
