@@ -1,5 +1,5 @@
 --[[
-   * ReaScript Name: Set Project Absolute Timebases
+   * ReaScript Name: Set Timebases for Tempo Mapping
    * Author: Richard Cook
    * Author URI: https://github.com/rcook/reaper-lua.git
    * Licence: MIT
@@ -24,4 +24,4 @@ local function main(ctx)
   message("Project timebases successfully set to absolute")
 end
 
-run("Set Project Absolute Timebases", main)
+run("Set Timebases for Tempo Mapping", main)

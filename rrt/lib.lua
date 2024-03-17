@@ -104,7 +104,7 @@ function dump(obj)
   end
 end
 
-function check_timebases(project_id)
+function check_timebases_for_tempo_mapping(project_id)
   local function is_midi_media_item(media_item)
     for i = 0, reaper.CountTakes(media_item) - 1 do
       local take = reaper.GetMediaItemTake(media_item, i)
@@ -256,7 +256,7 @@ function create_measure_tempo_time_sig_marker(project_id, start_time, end_time, 
   assert(time_sig_num > 0)
   assert(time_sig_denom > 0)
 
-  check_timebases(project_id)
+  check_timebases_for_tempo_mapping(project_id)
 
   local len = end_time - start_time
   local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)
