@@ -1,4 +1,4 @@
-# rrt&emdash;Richard's REAPER tools
+# rrt&mdash;Richard's REAPER tools
 
 ## Tempo mapping
 
