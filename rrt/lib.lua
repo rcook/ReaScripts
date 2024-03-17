@@ -201,8 +201,7 @@ function delete_all_tempo_time_sig_markers(project_id)
   for i = reaper.CountTempoTimeSigMarkers(project_id) - 1, 0, -1 do
     local status, _, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
     assert(status)
-    local status = reaper.DeleteTempoTimeSigMarker(project_id, i)
-    assert(status)
+    assert(reaper.DeleteTempoTimeSigMarker(project_id, i))
   end
 end
 
@@ -248,12 +247,10 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
       end
     end
 
-    local status = reaper.DeleteTempoTimeSigMarker(project_id, result.marker_id)
-    assert(status)
+    assert(reaper.DeleteTempoTimeSigMarker(project_id, result.marker_id))
   end
 
-  local status = reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0)
-  assert(status)
+  assert(reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0))
 end
 
 function run_create_single_measure_action(ctx, time_sig_num, time_sig_denom)
