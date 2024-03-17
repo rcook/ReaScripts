@@ -61,7 +61,51 @@ function abort(obj)
   error(tostring(obj))
 end
 
-function ensure_absolute_project_timebases(project_id)
+function dump(obj)
+  local t = type(obj)
+  if t == "userdata" then
+    return "[userdata]"
+  elseif t == "table" then
+    local s = "{ "
+    local i = 0
+    for k, v in pairs(obj) do
+      if i > 0 then s = s .. ", " end
+      s = s .. "[" .. dump(k) .. "] = " .. dump(v)
+      i = i + 1
+    end
+    return s .. "} "
+  elseif t == "string" then
+    return "\"" .. obj .. "\""
+  else
+    return tostring(obj)
+  end
+end
+
+function check_absolute_project_timebases(project_id)
+  local function is_midi_media_item(media_item)
+    for i = 0, reaper.CountTakes(media_item) - 1 do
+      local take = reaper.GetMediaItemTake(media_item, i)
+      if reaper.TakeIsMIDI(take) then
+        return true
+      end
+    end
+    return false
+  end
+
+  local function get_media_item_state(media_item)
+    local fs = reaper.SNM_CreateFastString("")
+    local status = reaper.SNM_GetSetObjectState(media_item, fs, false, true)
+    local s
+    if status then
+      s = reaper.SNM_GetFastString(fs)
+    end
+    reaper.SNM_DeleteFastString(fs)  
+    if not status then
+      abort("SNM_GetSetObjectState failed")
+    end
+    return s
+  end
+  --[[
   if reaper.SNM_GetIntConfigVarEx(project_id, "itemtimelock", -100) ~= 0 then
     exit("Timebase for items/envelopes/markers must be set to \"Time\"")
   end
@@ -69,6 +113,15 @@ function ensure_absolute_project_timebases(project_id)
   if reaper.SNM_GetIntConfigVarEx(project_id, "tempoenvtimelock", -100) ~=0 then
     exit("Timebase for tempo/time signature envelope must be set to \"Time\"")
   end
+--]]
+  for i = 0, reaper.CountMediaItems(project_id) - 1 do
+    local media_item = reaper.GetMediaItem(project_id, i)
+    if is_midi_media_item(media_item) then
+      local s = get_media_item_state(media_item)
+      trace(s:match("IGNTEMPO (%d)"))
+    end
+  end
+  exit("NOTIMPL")
 end
 
 function format_time(pos)
@@ -165,6 +218,8 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
   assert(end_time > start_time)
   assert(time_sig_num > 0)
   assert(time_sig_denom > 0)
+
+  check_absolute_project_timebases(project_id)
 
   local len = end_time - start_time
   local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)
