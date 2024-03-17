@@ -21,7 +21,7 @@ local function main(ctx)
 
   reaper.UpdateTimeline()
 
-  message("Project timebases successfully set to absolute")
+  message("Timebases successfully set for tempo mapping")
 end
 
 run("Set Timebases for Tempo Mapping", main)
