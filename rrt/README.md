@@ -14,6 +14,8 @@
 | ]                | Markers: Go to next marker/project end       |        |
 | Ctrl+Shift+[     | Move edit cursor to start of current measure | Custom |
 | Ctrl+Shift+]     | Move edit cursor to start of next measure    | Custom |
+| Ctrl+Shift+,     | Move edit cursor back one beat               | Custom |
+| Ctrl+Shift+.     | Move edit cursor forward one beat            | Custom |
 | Ctrl+Alt+Shift+M | Options: Toggle metronome                    | Custom |
 | Alt+Shift+0      | Script: CreateSingleMeasure.lua              | Custom |
 | Alt+Shift+1      | Script: CreateSingleMeasure_1_4.lua          | Custom |

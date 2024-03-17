@@ -10,6 +10,8 @@ SCR 4 0 RS90a16b15f868f5fcbbfb740e8cb9cad1c68283b7 "Custom: rrt_DeleteAllTempoTi
 SCR 4 0 RS4b54202f4d392692207db4839cec36584a981fc1 "Custom: rrt_SetTimebasesForTempoMapping.lua" rrt/rrt_SetTimebasesForTempoMapping.lua
 
 # Keyboard shortcuts for navigation
+KEY 13 188 41045 0       # Main : Ctrl+Shift+, : Move edit cursor back one beat
+KEY 13 190 41044 0       # Main : Ctrl+Shift+. : Move edit cursor forward one beat
 KEY 13 219 41041 0		 # Main : Ctrl+Shift+[ : Move edit cursor to start of current measure
 KEY 13 221 41040 0		 # Main : Ctrl+Shift+] : Move edit cursor to start of next measure
 
