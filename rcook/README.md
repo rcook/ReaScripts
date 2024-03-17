@@ -6,6 +6,8 @@
 | ---              | ---                                          | ---    |
 | {                | Loop points: Set start point                 |        |
 | }                | Loop points: Set end point                   |        |
+| Tab              | Item navigation: Move cursor to next transient in items     |   |
+| Shift+Tab        | Item navigation: Move cursor to previous transient in items |   |
 | [                | Markers: Go to previous marker/project start |        |
 | ]                | Markers: Go to next marker/project end       |        |
 | Ctrl+Shift+[     | Move edit cursor to start of current measure | Custom |
