@@ -7,6 +7,15 @@
 
 local EXIT_MARKER = "[EXIT]"
 local SCRIPT_TITLE = nil
+local VALID_TIME_SIG_DENOMS = {
+  [1] = true,
+  [2] = true,
+  [4] = true,
+  [8] = true,
+  [16] = true,
+  [32] = true,
+  [64] = true
+}
 
 function run(title, main)
   local function on_terminated(e)
@@ -95,7 +104,7 @@ function dump(obj)
   end
 end
 
-function check_absolute_project_timebases(project_id)
+function check_timebases(project_id)
   local function is_midi_media_item(media_item)
     for i = 0, reaper.CountTakes(media_item) - 1 do
       local take = reaper.GetMediaItemTake(media_item, i)
@@ -106,18 +115,20 @@ function check_absolute_project_timebases(project_id)
     return false
   end
 
-  local function get_media_item_state(media_item)
-    local fs = reaper.SNM_CreateFastString("")
-    local status = reaper.SNM_GetSetObjectState(media_item, fs, false, true)
-    local s
-    if status then
-      s = reaper.SNM_GetFastString(fs)
+  local function all_midi_media_items_ignore_project_tempo(project_id)
+    for i = 0, reaper.CountMediaItems(project_id) - 1 do
+      local media_item = reaper.GetMediaItem(project_id, i)
+      if is_midi_media_item(media_item) then
+        local status, chunk = reaper.GetItemStateChunk(media_item, "", true)
+        assert(status)
+        if chunk:match("IGNTEMPO 1") == nil then
+          return false
+        end
+      end
     end
-    reaper.SNM_DeleteFastString(fs)
-    assert(status)
-    return s
+    return true
   end
-  --[[
+
   if reaper.SNM_GetIntConfigVarEx(project_id, "itemtimelock", -100) ~= 0 then
     exit("Timebase for items/envelopes/markers must be set to \"Time\"")
   end
@@ -125,21 +136,34 @@ function check_absolute_project_timebases(project_id)
   if reaper.SNM_GetIntConfigVarEx(project_id, "tempoenvtimelock", -100) ~=0 then
     exit("Timebase for tempo/time signature envelope must be set to \"Time\"")
   end
---]]
-  for i = 0, reaper.CountMediaItems(project_id) - 1 do
-    local media_item = reaper.GetMediaItem(project_id, i)
-    if is_midi_media_item(media_item) then
-      --local s = get_media_item_state(media_item)
-      local status, str = reaper.GetItemStateChunk(media_item, "", true)
-      assert(status)
-      trace(str:match("IGNTEMPO (%d)"))
-    end
+
+  if not all_midi_media_items_ignore_project_tempo(project_id) then
+    exit("One or more MIDI media items does not ignore project tempo")
   end
-  exit("NOTIMPL")
 end
 
 function format_time(pos)
   return reaper.format_timestr_pos(pos, "", -1)
+end
+
+function is_time_sig_num(value)
+  return is_integer(value) and value >= 1
+end
+
+function is_time_sig_denom(value)
+  return is_integer(value) and VALID_TIME_SIG_DENOMS[value] ~= nil
+end
+
+function to_time_sig_num(obj)
+  local value = to_integer(obj)
+  assert(is_time_sig_num(value))
+  return value
+end
+
+function to_time_sig_denom(obj)
+  local value = to_integer(obj)
+  assert(is_time_sig_denom(value))
+  return value
 end
 
 function get_user_inputs(inputs)
@@ -222,7 +246,7 @@ function get_tempo_time_sig_marker(project_id, time)
   return nil
 end
 
-function create_single_measure_tempo_time_sig_marker(project_id, start_time, end_time, time_sig_num, time_sig_denom)
+function create_measure_tempo_time_sig_marker(project_id, start_time, end_time, time_sig_num, time_sig_denom)
   assert(is_integer(project_id))
   assert(is_number(start_time))
   assert(is_number(end_time))
@@ -232,7 +256,7 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
   assert(time_sig_num > 0)
   assert(time_sig_denom > 0)
 
-  check_absolute_project_timebases(project_id)
+  check_timebases(project_id)
 
   local len = end_time - start_time
   local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)
@@ -253,14 +277,17 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
   assert(reaper.SetTempoTimeSigMarker(project_id, -1, start_time, -1, -1, tempo, time_sig_num, time_sig_denom, 0))
 end
 
-function run_create_single_measure_action(ctx, time_sig_num, time_sig_denom)
+function mark_measure_action(ctx, time_sig_num, time_sig_denom)
+  assert(time_sig_num == nil or is_time_sig_num(time_sig_num))
+  assert(time_sig_denom == nil or is_time_sig_denom(time_sig_denom))
+
   local time_sig_num_str, time_sig_denom_str = ctx.script_path:match("_(%d+)_(%d+)")
 
   if time_sig_num == nil then
-    time_sig_num = to_integer(time_sig_num_str)
+    time_sig_num = to_time_sig_num(time_sig_num_str)
   end
   if time_sig_denom == nil then
-    time_sig_denom = to_integer(time_sig_denom_str)
+    time_sig_denom = to_time_sig_denom(time_sig_denom_str)
   end
 
   local start_time, end_time = reaper.GetSet_LoopTimeRange2(ctx.project_id, false, false, 0, 0, false)
@@ -269,7 +296,7 @@ function run_create_single_measure_action(ctx, time_sig_num, time_sig_denom)
     exit("Selected time range is empty")
   end
 
-  create_single_measure_tempo_time_sig_marker(
+  create_measure_tempo_time_sig_marker(
     ctx.project_id,
     start_time,
     end_time,

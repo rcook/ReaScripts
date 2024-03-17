@@ -1,5 +1,5 @@
 --[[
-   * ReaScript Name: Create Single Measure
+   * ReaScript Name: Mark Measure
    * Author: Richard Cook
    * Author URI: https://github.com/rcook/reaper-lua.git
    * Licence: MIT
@@ -7,4 +7,4 @@
 --]]
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
-run("Create Single Measure", run_create_single_measure_action)
+run("Mark Measure", mark_measure_action)
