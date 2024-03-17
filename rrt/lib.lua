@@ -105,6 +105,8 @@ function dump(obj)
 end
 
 function check_timebases_for_tempo_mapping(project_id)
+  assert(is_integer(project_id))
+
   local function is_midi_media_item(media_item)
     for i = 0, reaper.CountTakes(media_item) - 1 do
       local take = reaper.GetMediaItemTake(media_item, i)
@@ -222,6 +224,8 @@ function confirm(s)
 end
 
 function delete_all_tempo_time_sig_markers(project_id)
+  assert(is_integer(project_id))
+
   for i = reaper.CountTempoTimeSigMarkers(project_id) - 1, 0, -1 do
     local status, _, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
     assert(status)
@@ -230,6 +234,9 @@ function delete_all_tempo_time_sig_markers(project_id)
 end
 
 function get_tempo_time_sig_marker(project_id, time)
+  assert(is_integer(project_id))
+  assert(is_number(time))
+
   for i = 0, reaper.CountTempoTimeSigMarkers(project_id) - 1 do
     local status, marker_time, _, _, _, _, _, _ = reaper.GetTempoTimeSigMarker(project_id, i)
     assert(status)
@@ -250,11 +257,9 @@ function create_measure_tempo_time_sig_marker(project_id, start_time, end_time, 
   assert(is_integer(project_id))
   assert(is_number(start_time))
   assert(is_number(end_time))
-  assert(is_integer(time_sig_num))
-  assert(is_integer(time_sig_denom))
+  assert(is_time_sig_num(time_sig_num))
+  assert(is_time_sig_denom(time_sig_denom))
   assert(end_time > start_time)
-  assert(time_sig_num > 0)
-  assert(time_sig_denom > 0)
 
   check_timebases_for_tempo_mapping(project_id)
 
