@@ -61,6 +61,20 @@ function abort(obj)
   error(tostring(obj))
 end
 
+function to_integer(obj)
+  local value = math.tointeger(obj)
+  assert(is_integer(value))
+  return value
+end
+
+function is_number(obj)
+  return type(obj) == "number"
+end
+
+function is_integer(obj)
+  return is_number(obj) and math.tointeger(obj) == obj
+end
+
 function dump(obj)
   local t = type(obj)
   if t == "userdata" then
@@ -99,7 +113,7 @@ function check_absolute_project_timebases(project_id)
     if status then
       s = reaper.SNM_GetFastString(fs)
     end
-    reaper.SNM_DeleteFastString(fs)  
+    reaper.SNM_DeleteFastString(fs)
     if not status then
       abort("SNM_GetSetObjectState failed")
     end
@@ -117,8 +131,10 @@ function check_absolute_project_timebases(project_id)
   for i = 0, reaper.CountMediaItems(project_id) - 1 do
     local media_item = reaper.GetMediaItem(project_id, i)
     if is_midi_media_item(media_item) then
-      local s = get_media_item_state(media_item)
-      trace(s:match("IGNTEMPO (%d)"))
+      --local s = get_media_item_state(media_item)
+      local status, str = reaper.GetItemStateChunk(media_item, "", true)
+      --trace(s:match("IGNTEMPO (%d)"))
+      trace(str)
     end
   end
   exit("NOTIMPL")
@@ -215,6 +231,11 @@ function get_tempo_time_sig_marker(project_id, time)
 end
 
 function create_single_measure_tempo_time_sig_marker(project_id, start_time, end_time, time_sig_num, time_sig_denom)
+  assert(is_integer(project_id))
+  assert(is_number(start_time))
+  assert(is_number(end_time))
+  assert(is_integer(time_sig_num))
+  assert(is_integer(time_sig_denom))
   assert(end_time > start_time)
   assert(time_sig_num > 0)
   assert(time_sig_denom > 0)
@@ -245,13 +266,13 @@ function create_single_measure_tempo_time_sig_marker(project_id, start_time, end
 end
 
 function run_create_single_measure_action(ctx, time_sig_num, time_sig_denom)
-  local time_sig_num_str, time_sig_denom_str = ctx.script_path:match("CreateSingleMeasure_(%d+)_(%d+)")
+  local time_sig_num_str, time_sig_denom_str = ctx.script_path:match("_(%d+)_(%d+)")
 
   if time_sig_num == nil then
-    time_sig_num = math.tointeger(time_sig_num_str)
+    time_sig_num = to_integer(time_sig_num_str)
   end
   if time_sig_denom == nil then
-    time_sig_denom = math.tointeger(time_sig_denom_str)
+    time_sig_denom = to_integer(time_sig_denom_str)
   end
 
   local start_time, end_time = reaper.GetSet_LoopTimeRange2(ctx.project_id, false, false, 0, 0, false)
