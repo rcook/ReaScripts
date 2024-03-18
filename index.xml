@@ -1,8 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="rrx" commit="16a1cb513130b8376a8d5e242caee6376620fedc">
-<category name="Tempo Mapping">
-</category>
-<metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+<index version="1" name="rrx" commit="87e7053b4459358aee5a41211a476db4010d86b5">
+  <category name="Tempo Mapping">
+<reapack name="rrx.lua" type="script" desc="rrx"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Shared library for rrx\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx.lua</source></version></reapack><reapack name="rrx_DeleteAllTempoTimeSigMarkers.lua" type="script" desc="Delete All Tempo and Time Signature Markers"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Deletes all tempo and time signature markers\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_DeleteAllTempoTimeSigMarkers.lua</source></version></reapack><reapack name="rrx_MarkMeasure.lua" type="script" desc="Mark Measure"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as a measure with user-supplied time signature\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure.lua</source></version></reapack><reapack name="rrx_MarkMeasure_1_4.lua" type="script" desc="Mark Measure 1/4"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 1/4 time\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure_1_4.lua</source></version></reapack><reapack name="rrx_MarkMeasure_2_4.lua" type="script" desc="Mark Measure 2/4"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 2/4 time\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure_2_4.lua</source></version></reapack><reapack name="rrx_MarkMeasure_3_4.lua" type="script" desc="Mark Measure 3/4"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 3/4 time\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure_3_4.lua</source></version></reapack><reapack name="rrx_MarkMeasure_4_4.lua" type="script" desc="Mark Measure 4/4"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 4/4 time\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure_4_4.lua</source></version></reapack><reapack name="rrx_MarkMeasure_5_4.lua" type="script" desc="Mark Measure 5/4"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 5/4 time\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure_5_4.lua</source></version></reapack><reapack name="rrx_MarkMeasure_6_8.lua" type="script" desc="Mark Measure 6/8"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 6/8 time\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_MarkMeasure_6_8.lua</source></version></reapack><reapack name="rrx_SetTimebasesForTempoMapping.lua" type="script" desc="Set Timebases for Tempo Mapping"><metadata><description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Sets timebases for tempo mapping\par}
+}
+]]></description></metadata><version name="0.0" author="Richard Cook" time="2024-03-18T21:30:58Z"><source main="main">https://github.com/rcook/rrx/raw/87e7053b4459358aee5a41211a476db4010d86b5/Tempo%20Mapping/rrx_SetTimebasesForTempoMapping.lua</source></version></reapack></category>
+  <metadata>
+    <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
 {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
 \widowctrl\hyphauto
 
@@ -29,4 +90,6 @@ ReaPack dev thread
 }}}
  for developer information\par}
 }
-]]></description></metadata></index>
+]]></description>
+  </metadata>
+</index>
