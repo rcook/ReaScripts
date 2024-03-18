@@ -1,13 +1,13 @@
 # Tempo mapping actions
-SCR 4 0 RS86fb0044a79a2aa29026073066c1a12709d7be23 "Custom: rrx_MarkMeasure.lua" rrx_MarkMeasure.lua
-SCR 4 0 RSbda51544d5c770a0eaf3527951745c5de4c0e2b5 "Custom: rrx_MarkMeasure_1_4.lua" rrx_MarkMeasure_1_4.lua
-SCR 4 0 RSe24151174d9fe831d9b15430815d19f826c3f90d "Custom: rrx_MarkMeasure_2_4.lua" rrx_MarkMeasure_2_4.lua
-SCR 4 0 RS20b7ae1c8b0e818a944e674f10919e713eb3c9cd "Custom: rrx_MarkMeasure_3_4.lua" rrx_MarkMeasure_3_4.lua
-SCR 4 0 RS1758bfc6a06d108237b4b2c7e6e089d942fd5f1d "Custom: rrx_MarkMeasure_4_4.lua" rrx_MarkMeasure_4_4.lua
-SCR 4 0 RS3008846e53c4569c15ddc7c3940a873f264fc92d "Custom: rrx_MarkMeasure_5_4.lua" rrx_MarkMeasure_5_4.lua
-SCR 4 0 RS6169bfbb78aaa1c7089cd1813b60418905f1c9e5 "Custom: rrx_MarkMeasure_6_8.lua" rrx_MarkMeasure_6_8.lua
-SCR 4 0 RS90a16b15f868f5fcbbfb740e8cb9cad1c68283b7 "Custom: rrx_DeleteAllTempoTimeSigMarkers.lua" rrx_DeleteAllTempoTimeSigMarkers.lua
-SCR 4 0 RS4b54202f4d392692207db4839cec36584a981fc1 "Custom: rrx_SetTimebasesForTempoMapping.lua" rrx_SetTimebasesForTempoMapping.lua
+SCR 4 0 RS86fb0044a79a2aa29026073066c1a12709d7be23 "Custom: rrx_MarkMeasure.lua" rrx/rrx_MarkMeasure.lua
+SCR 4 0 RSbda51544d5c770a0eaf3527951745c5de4c0e2b5 "Custom: rrx_MarkMeasure_1_4.lua" rrx/rrx_MarkMeasure_1_4.lua
+SCR 4 0 RSe24151174d9fe831d9b15430815d19f826c3f90d "Custom: rrx_MarkMeasure_2_4.lua" rrx/rrx_MarkMeasure_2_4.lua
+SCR 4 0 RS20b7ae1c8b0e818a944e674f10919e713eb3c9cd "Custom: rrx_MarkMeasure_3_4.lua" rrx/rrx_MarkMeasure_3_4.lua
+SCR 4 0 RS1758bfc6a06d108237b4b2c7e6e089d942fd5f1d "Custom: rrx_MarkMeasure_4_4.lua" rrx/rrx_MarkMeasure_4_4.lua
+SCR 4 0 RS3008846e53c4569c15ddc7c3940a873f264fc92d "Custom: rrx_MarkMeasure_5_4.lua" rrx/rrx_MarkMeasure_5_4.lua
+SCR 4 0 RS6169bfbb78aaa1c7089cd1813b60418905f1c9e5 "Custom: rrx_MarkMeasure_6_8.lua" rrx/rrx_MarkMeasure_6_8.lua
+SCR 4 0 RS90a16b15f868f5fcbbfb740e8cb9cad1c68283b7 "Custom: rrx_DeleteAllTempoTimeSigMarkers.lua" rrx/rrx_DeleteAllTempoTimeSigMarkers.lua
+SCR 4 0 RS4b54202f4d392692207db4839cec36584a981fc1 "Custom: rrx_SetTimebasesForTempoMapping.lua" rrx/rrx_SetTimebasesForTempoMapping.lua
 
 # Keyboard shortcuts for navigation
 KEY 13 188 41045 0       # Main : Ctrl+Shift+, : Move edit cursor back one beat
