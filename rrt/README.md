@@ -17,10 +17,10 @@
 | Ctrl+Shift+,     | Move edit cursor back one beat               | Custom |
 | Ctrl+Shift+.     | Move edit cursor forward one beat            | Custom |
 | Ctrl+Alt+Shift+M | Options: Toggle metronome                    | Custom |
-| Alt+Shift+0      | Script: CreateSingleMeasure.lua              | Custom |
-| Alt+Shift+1      | Script: CreateSingleMeasure_1_4.lua          | Custom |
-| Alt+Shift+2      | Script: CreateSingleMeasure_2_4.lua          | Custom |
-| Alt+Shift+3      | Script: CreateSingleMeasure_3_4.lua          | Custom |
-| Alt+Shift+4      | Script: CreateSingleMeasure_4_4.lua          | Custom |
-| Alt+Shift+5      | Script: CreateSingleMeasure_5_4.lua          | Custom |
-| Alt+Shift+6      | Script: CreateSingleMeasure_6_8.lua          | Custom |
+| Alt+Shift+0      | Script: MarkMeasure.lua                      | Custom |
+| Alt+Shift+1      | Script: MarkMeasure_1_4.lua                  | Custom |
+| Alt+Shift+2      | Script: MarkMeasure_2_4.lua                  | Custom |
+| Alt+Shift+3      | Script: MarkMeasure_3_4.lua                  | Custom |
+| Alt+Shift+4      | Script: MarkMeasure_4_4.lua                  | Custom |
+| Alt+Shift+5      | Script: MarkMeasure_5_4.lua                  | Custom |
+| Alt+Shift+6      | Script: MarkMeasure_6_8.lua                  | Custom |
