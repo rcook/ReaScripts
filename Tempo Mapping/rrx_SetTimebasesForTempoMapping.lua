@@ -1,10 +1,8 @@
---[[
-  * ReaScript Name: Set Timebases for Tempo Mapping
-  * Author: Richard Cook
-  * Author URI: https://github.com/rcook/rrx.git
-  * Licence: MIT
-  * Version: 0.0
---]]
+-- @description Set Timebases for Tempo Mapping
+-- @author Richard Cook
+-- @version 0.0
+-- @about
+-- Sets timebases for tempo mapping
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 

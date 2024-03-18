@@ -1,10 +1,9 @@
---[[
-  * ReaScript Name: Mark Measure
-  * Author: Richard Cook
-  * Author URI: https://github.com/rcook/rrx.git
-  * Licence: MIT
-  * Version: 0.0
---]]
+-- @description Mark Measure
+-- @author Richard Cook
+-- @version 0.0
+-- @about
+-- Marks current time selection as a measure with user-supplied time
+-- signature
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 

@@ -1,10 +1,8 @@
---[[
-  * ReaScript Name: Delete All Tempo and Time Signature Markers
-  * Author: Richard Cook
-  * Author URI: https://github.com/rcook/rrx.git
-  * Licence: MIT
-  * Version: 0.0
---]]
+-- @description Delete All Tempo and Time Signature Markers
+-- @author Richard Cook
+-- @version 0.0
+-- @about
+-- Deletes all tempo and time signature markers
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 
