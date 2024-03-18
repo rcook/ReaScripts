@@ -1,9 +1,8 @@
---[[
-  * Author: Richard Cook
-  * Author URI: https://github.com/rcook/rrx.git
-  * Licence: MIT
-  * Version: 0.0
---]]
+-- @description rrx
+-- @author Richard Cook
+-- @version 0.0
+-- @about
+--  Shared library for rrx
 
 local EXIT_MARKER = "[EXIT]"
 local SCRIPT_TITLE = nil

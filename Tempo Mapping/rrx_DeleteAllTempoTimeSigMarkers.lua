@@ -2,7 +2,7 @@
 -- @author Richard Cook
 -- @version 0.0
 -- @about
--- Deletes all tempo and time signature markers
+--  Deletes all tempo and time signature markers
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 

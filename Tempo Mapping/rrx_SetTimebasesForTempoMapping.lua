@@ -2,7 +2,7 @@
 -- @author Richard Cook
 -- @version 0.0
 -- @about
--- Sets timebases for tempo mapping
+--  Sets timebases for tempo mapping
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 

@@ -2,8 +2,8 @@
 -- @author Richard Cook
 -- @version 0.0
 -- @about
--- Marks current time selection as a measure with user-supplied time
--- signature
+--  Marks current time selection as a measure with user-supplied time
+--  signature
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 
