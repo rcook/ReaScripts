@@ -15,9 +15,19 @@ Released under [MIT License](LICENSE)
 
 ### Keyboard shortcuts
 
-| Shortcut         | Description                                  | Type   |
-| ---              | ---                                          | ---    |
-| {                | Loop points: Set start point                 |        |
+<table>
+<thead>
+<tr>
+  <td>Shortcut</td>
+  <td>Description</td>
+  <td>Type</td>
+</tr>
+</thead>
+<tbody>
+<tr><td><pre>{</pre></td><td>Loop points: Set start point</td></tr>
+</tbody>
+</table>
+
 | }                | Loop points: Set end point                   |        |
 | Tab              | Item navigation: Move cursor to next transient in items     |   |
 | Shift+Tab        | Item navigation: Move cursor to previous transient in items |   |
