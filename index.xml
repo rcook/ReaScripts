@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="rrx" commit="4517a961c37072e467df808f9d68fabb7949f98b">
+<index version="1" name="rrx" commit="6f1da4b9a5195c2626164627c3be20f8538381a8">
   <category name="Tempo Mapping">
     <reapack name="cfillion_Hello world.lua" type="script" desc="Hello world">
       <metadata>
@@ -18,6 +18,70 @@ Markdown
       </metadata>
       <version name="1.0" author="cfillion" time="2021-01-04T23:30:32Z">
         <source main="main">https://github.com/cfillion/reapack-repository-template/raw/58a3e39ba95bd0f35846aa1f39aa4cb2574295e1/Example/cfillion_Hello%20world.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx.lua" type="script">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_DeleteAllTempoTimeSigMarkers.lua" type="script" desc="Delete All Tempo and Time Signature Markers">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_DeleteAllTempoTimeSigMarkers.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_HelloWorld.lua" type="script" desc="Hello World">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Displays "Hello World".\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="rcook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_HelloWorld.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_1_4.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure_1_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_2_4.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure_2_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_3_4.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure_3_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_4_4.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure_4_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_5_4.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure_5_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_6_8.lua" type="script" desc="Mark Measure">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_MarkMeasure_6_8.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_SetTimebasesForTempoMapping.lua" type="script" desc="Set Timebases for Tempo Mapping">
+      <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
+        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_SetTimebasesForTempoMapping.lua</source>
       </version>
     </reapack>
   </category>
