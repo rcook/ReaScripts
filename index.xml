@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="rrx" commit="6f1da4b9a5195c2626164627c3be20f8538381a8">
+<index version="1" name="rrx" commit="16a1cb513130b8376a8d5e242caee6376620fedc">
   <category name="Tempo Mapping">
     <reapack name="rrx.lua" type="script">
       <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
@@ -9,20 +9,6 @@
     <reapack name="rrx_DeleteAllTempoTimeSigMarkers.lua" type="script" desc="Delete All Tempo and Time Signature Markers">
       <version name="0.0" author="Richard Cook" time="2024-03-18T20:53:28Z">
         <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_DeleteAllTempoTimeSigMarkers.lua</source>
-      </version>
-    </reapack>
-    <reapack name="rrx_HelloWorld.lua" type="script" desc="Hello World">
-      <metadata>
-        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
-{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
-\widowctrl\hyphauto
-
-{\pard \ql \f0 \sa180 \li0 \fi0 Displays "Hello World".\par}
-}
-]]></description>
-      </metadata>
-      <version name="0.0" author="rcook" time="2024-03-18T20:53:28Z">
-        <source main="main">https://github.com/rcook/rrx/raw/6f1da4b9a5195c2626164627c3be20f8538381a8/Tempo%20Mapping/rrx_HelloWorld.lua</source>
       </version>
     </reapack>
     <reapack name="rrx_MarkMeasure.lua" type="script" desc="Mark Measure">
