@@ -2,9 +2,14 @@
 
 Released under [MIT License](LICENSE)
 
-## Overview
+## Install in REAPER using ReaPack
 
-See [ReaPack dev thread][reapack-dev-thread] for developer information
+1. Start REAPER
+2. Go to _Extensions_ | _ReaPack_ | _Manage repositories..._ |
+3. Click on _Import/export..._
+4. Click on _Import repositories..._
+5. Enter [https://github.com/rcook/rrx/raw/main/index.xml](https://github.com/rcook/rrx/raw/main/index.xml)
+6. Click _OK_
 
 ## Tempo mapping
 
@@ -30,5 +35,9 @@ See [ReaPack dev thread][reapack-dev-thread] for developer information
 | Alt+Shift+4      | Script: rrx_MarkMeasure_4_4.lua              | Custom |
 | Alt+Shift+5      | Script: rrx_MarkMeasure_5_4.lua              | Custom |
 | Alt+Shift+6      | Script: rrx_MarkMeasure_6_8.lua              | Custom |
+
+## Developer information
+
+See [ReaPack dev thread][reapack-dev-thread] for developer information
 
 [reapack-dev-thread]: https://forum.cockos.com/showthread.php?t=258538
