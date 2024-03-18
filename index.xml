@@ -45,8 +45,8 @@ README.md
 Packaging Documentation
 }}}
  on reapack-index's wiki.\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 The URL to import in ReaPack is {\field{\*\fldinst{HYPERLINK "https://github.com/cfillion/reapack-repository-template/raw/master/index.xml"}}{\fldrslt{\ul
-https://github.com/{\f1 <your username>}/{\f1 <repository name>}/raw/master/index.xml
+{\pard \ql \f0 \sa180 \li0 \fi0 The URL to import in ReaPack is {\field{\*\fldinst{HYPERLINK "https://github.com/cfillion/reapack-repository-template/raw/main/index.xml"}}{\fldrslt{\ul
+https://github.com/{\f1 <your username>}/{\f1 <repository name>}/raw/main/index.xml
 }}}
 .\par}
 }
