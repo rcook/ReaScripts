@@ -1,4 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="rrx" commit="87e7053b4459358aee5a41211a476db4010d86b5">
-  <category name="rrx"></category>
+<index version="1" name="rrx" commit="e1ac8965fd6911a7f2e6e4935d34c3e321647514">
+  <category name="rrx">
+    <reapack name="rrx.lua" type="script" desc="rrx">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Shared library for rrx\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_DeleteAllTempoTimeSigMarkers.lua" type="script" desc="Delete All Tempo and Time Signature Markers">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Deletes all tempo and time signature markers\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_DeleteAllTempoTimeSigMarkers.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure.lua" type="script" desc="Mark Measure">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as a measure with user-supplied time signature\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_1_4.lua" type="script" desc="Mark Measure 1/4">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 1/4 time\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure_1_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_2_4.lua" type="script" desc="Mark Measure 2/4">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 2/4 time\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure_2_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_3_4.lua" type="script" desc="Mark Measure 3/4">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 3/4 time\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure_3_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_4_4.lua" type="script" desc="Mark Measure 4/4">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 4/4 time\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure_4_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_5_4.lua" type="script" desc="Mark Measure 5/4">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 5/4 time\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure_5_4.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_MarkMeasure_6_8.lua" type="script" desc="Mark Measure 6/8">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Marks current time selection as one measure in 6/8 time\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_MarkMeasure_6_8.lua</source>
+      </version>
+    </reapack>
+    <reapack name="rrx_SetTimebasesForTempoMapping.lua" type="script" desc="Set Timebases for Tempo Mapping">
+      <metadata>
+        <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 Sets timebases for tempo mapping\par}
+}
+]]></description>
+      </metadata>
+      <version name="0.0" author="Richard Cook" time="2024-03-18T21:41:45Z">
+        <source main="main">https://github.com/rcook/rrx/raw/e1ac8965fd6911a7f2e6e4935d34c3e321647514/rrx/rrx_SetTimebasesForTempoMapping.lua</source>
+      </version>
+    </reapack>
+  </category>
+  <metadata>
+    <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+{\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
+\widowctrl\hyphauto
+
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 rrx\u8212-Richard's REAPER Extensions\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Released under {\field{\*\fldinst{HYPERLINK "LICENSE"}}{\fldrslt{\ul
+MIT License
+}}}
+\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Install in REAPER using ReaPack\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Start REAPER\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Go to {\i Extensions} | {\i ReaPack} | {\i Manage repositories...}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Click on {\i Import/export...}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Click on {\i Import repositories...}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab Enter {\field{\*\fldinst{HYPERLINK "https://github.com/rcook/rrx/raw/main/index.xml"}}{\fldrslt{\ul
+https://github.com/rcook/rrx/raw/main/index.xml
+}}}
+\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 6.\tx360\tab Click {\i OK}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Tempo mapping\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Keyboard shortcuts\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Developer information\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 See {\field{\*\fldinst{HYPERLINK "https://forum.cockos.com/showthread.php?t=258538"}}{\fldrslt{\ul
+ReaPack dev thread
+}}}
+ for developer information\par}
+}
+]]></description>
+  </metadata>
 </index>
