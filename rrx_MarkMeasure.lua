@@ -1,9 +1,9 @@
 --[[
-   * ReaScript Name: Mark Measure
-   * Author: Richard Cook
-   * Author URI: https://github.com/rcook/reaper-extensions.git
-   * Licence: MIT
-   * Version: 0.0
+  * ReaScript Name: Mark Measure
+  * Author: Richard Cook
+  * Author URI: https://github.com/rcook/rrx.git
+  * Licence: MIT
+  * Version: 0.0
 --]]
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")

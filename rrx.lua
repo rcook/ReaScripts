@@ -1,8 +1,8 @@
 --[[
-   * Author: Richard Cook
-   * Author URI: https://github.com/rcook/reaper-extensions.git
-   * Licence: MIT
-   * Version: 0.0
+  * Author: Richard Cook
+  * Author URI: https://github.com/rcook/rrx.git
+  * Licence: MIT
+  * Version: 0.0
 --]]
 
 local EXIT_MARKER = "[EXIT]"
