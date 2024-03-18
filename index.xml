@@ -33,7 +33,7 @@ MIT License
 \par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Install in REAPER using ReaPack\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Start REAPER\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Go to {\i Extensions} | {\i ReaPack} | {\i Manage repositories...} |\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Go to {\i Extensions} | {\i ReaPack} | {\i Manage repositories...}\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Click on {\i Import/export...}\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 4.\tx360\tab Click on {\i Import repositories...}\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 5.\tx360\tab Enter {\field{\*\fldinst{HYPERLINK "https://github.com/rcook/rrx/raw/main/index.xml"}}{\fldrslt{\ul
@@ -43,7 +43,7 @@ https://github.com/rcook/rrx/raw/main/index.xml
 {\pard \ql \f0 \sa0 \li360 \fi-360 6.\tx360\tab Click {\i OK}\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Tempo mapping\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 Keyboard shortcuts\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 | Shortcut | Description | Type | | --- | --- | --- | | \{ | Loop points: Set start point | | | \} | Loop points: Set end point | | | Tab | Item navigation: Move cursor to next transient in items | | | Shift+Tab | Item navigation: Move cursor to previous transient in items | | | [ | Markers: Go to previous marker/project start | | | ] | Markers: Go to next marker/project end | | | Ctrl+Shift+[ | Move edit cursor to start of current measure | Custom | | Ctrl+Shift+] | Move edit cursor to start of next measure | Custom | | Ctrl+Shift+, | Move edit cursor back one beat | Custom | | Ctrl+Shift+. | Move edit cursor forward one beat | Custom | | Ctrl+Alt+Shift+M | Options: Toggle metronome | Custom | | Alt+Shift+0 | Script: rrx_MarkMeasure.lua | Custom | | Alt+Shift+1 | Script: rrx_MarkMeasure_1_4.lua | Custom | | Alt+Shift+2 | Script: rrx_MarkMeasure_2_4.lua | Custom | | Alt+Shift+3 | Script: rrx_MarkMeasure_3_4.lua | Custom | | Alt+Shift+4 | Script: rrx_MarkMeasure_4_4.lua | Custom | | Alt+Shift+5 | Script: rrx_MarkMeasure_5_4.lua | Custom | | Alt+Shift+6 | Script: rrx_MarkMeasure_6_8.lua | Custom |\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 | \} | Loop points: Set end point | | | Tab | Item navigation: Move cursor to next transient in items | | | Shift+Tab | Item navigation: Move cursor to previous transient in items | | | [ | Markers: Go to previous marker/project start | | | ] | Markers: Go to next marker/project end | | | Ctrl+Shift+[ | Move edit cursor to start of current measure | Custom | | Ctrl+Shift+] | Move edit cursor to start of next measure | Custom | | Ctrl+Shift+, | Move edit cursor back one beat | Custom | | Ctrl+Shift+. | Move edit cursor forward one beat | Custom | | Ctrl+Alt+Shift+M | Options: Toggle metronome | Custom | | Alt+Shift+0 | Script: rrx_MarkMeasure.lua | Custom | | Alt+Shift+1 | Script: rrx_MarkMeasure_1_4.lua | Custom | | Alt+Shift+2 | Script: rrx_MarkMeasure_2_4.lua | Custom | | Alt+Shift+3 | Script: rrx_MarkMeasure_3_4.lua | Custom | | Alt+Shift+4 | Script: rrx_MarkMeasure_4_4.lua | Custom | | Alt+Shift+5 | Script: rrx_MarkMeasure_5_4.lua | Custom | | Alt+Shift+6 | Script: rrx_MarkMeasure_6_8.lua | Custom |\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Developer information\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 See {\field{\*\fldinst{HYPERLINK "https://forum.cockos.com/showthread.php?t=258538"}}{\fldrslt{\ul
 ReaPack dev thread
