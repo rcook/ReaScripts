@@ -5,8 +5,6 @@
 -- @about
 --  rrx&mdash;Richard's REAPER Extensions
 -- @provides
---  [data] rrx.ReaperKeyMap
---  [data] rrx_Actions.ReaperMenu
 --  [data] rrx_TEMPO_MAPPING.md
 --  [main] rrx_DeleteAllTempoTimeSigMarkers.lua
 --  [main] rrx_GenerateConfigFiles.lua
