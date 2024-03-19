@@ -33,9 +33,14 @@ function run(title, main)
     exit("Please install a recent version of SWS/S&M (https://www.sws-extension.org)")
   end
 
+  if not reaper.APIExists("JS_Dialog_BrowseForSaveFile") then
+    exit("Please install a recent version of ReaExtensions (https://github.com/ReaTeam/Extensions/raw/master/index.xml)")
+  end
+
   local ctx = {
     project_id = 0,
-    script_path = (({reaper.get_action_context()})[2])
+    script_path = (({reaper.get_action_context()})[2]),
+    script_title = SCRIPT_TITLE
   }
 
   local status, result = xpcall(main, on_terminated, ctx)
