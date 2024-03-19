@@ -76,18 +76,22 @@ local function make_menu_ini(actions)
 end
 
 local function main(ctx)
-  local desktop_dir = join_paths(os.getenv("USERPROFILE"), "Desktop")
+  local this_path = normalize_path(debug.getinfo(1).source:match("@?(.*)"))
+  local resource_dir = normalize_path(reaper.GetResourcePath())
+  local scripts_dir = join_paths(resource_dir, "Scripts")
+  local menu_sets_dir = join_paths(resource_dir, "MenuSets")
+
   local status, menu_path = reaper.JS_Dialog_BrowseForSaveFile(
     ctx.script_title,
-    desktop_dir,
+    menu_sets_dir,
     "rrx_Actions.ReaperMenu",
     "ReaperMenu files (.ReaperMenu)\0*.*\0\0")
   if status == 0 then
-    exit("Cancelled")
+    exit()
   end
   assert(status == 1)
 
-  local scripts_dir = normalize_path(debug.getinfo(1).source:match("@?(.*[/\\])"))
+
   local rrx_subdir = join_paths("rcook-reascripts", "rrx")
   local rrx_dir = join_paths(scripts_dir, rrx_subdir)
   local file_idx = 0
@@ -96,17 +100,23 @@ local function main(ctx)
   while true do
     local f = reaper.EnumerateFiles(rrx_dir, file_idx)
     file_idx = file_idx + 1
+
     if f == nil then break end
-    if f:find("^rrx_") ~= nil then
-      local p = join_paths(rrx_dir, f)
-      local desc = read_description(p)
-      local rel_path = join_paths(rrx_subdir, f)
-      local action_id = read_script_action_id(rel_path, 0)
-      actions[#actions + 1] = {
-        action_id = action_id,
-        desc = desc
-      }
-    end
+
+    if f:find("^rrx_") == nil then goto continue end
+
+    local p = join_paths(rrx_dir, f)
+    if p == this_path then goto continue end
+
+    local desc = read_description(p)
+    local rel_path = join_paths(rrx_subdir, f)
+    local action_id = read_script_action_id(rel_path, 0)
+    actions[#actions + 1] = {
+      action_id = action_id,
+      desc = desc
+    }
+
+    ::continue::
   end
 
   local menu_ini = make_menu_ini(actions)
