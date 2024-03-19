@@ -78,6 +78,10 @@
 \widowctrl\hyphauto
 
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 Richard's REAPER Scripts\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 ReaPack repository URL: {\field{\*\fldinst{HYPERLINK "https://github.com/rcook/ReaScripts/raw/main/index.xml"}}{\fldrslt{\ul
+https://github.com/rcook/ReaScripts/raw/main/index.xml
+}}}
+\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Released under {\field{\*\fldinst{HYPERLINK "LICENSE"}}{\fldrslt{\ul
 MIT License
 }}}
