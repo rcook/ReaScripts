@@ -1,7 +1,7 @@
 -- @metapackage
 -- @description rrx
 -- @author Richard Cook
--- @version 0.02
+-- @version 0.03
 -- @about
 --  rrx&mdash;Richard's REAPER Extensions
 -- @provides
