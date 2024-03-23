@@ -1,9 +1,13 @@
 -- @metapackage
 -- @description rrx
 -- @author Richard Cook
--- @version 0.03
+-- @version 0.04
 -- @about
 --  rrx&mdash;Richard's REAPER Extensions
+--  * [Tempo mapping](https://github.com/rcook/ReaScripts/blob/main/rrx/rrx_TEMPO_MAPPING.md)
+-- @changelog
+--  Fixed key code for "Mark Measure" action
+--  Added documentation link
 -- @provides
 --  [data] rrx_TEMPO_MAPPING.md
 --  [main] rrx_DeleteAllTempoTimeSigMarkers.lua
