@@ -1,3 +1,4 @@
+-- @noindex
 -- @description Mark Measure 6/8
 -- @author Richard Cook
 -- @version 0.0

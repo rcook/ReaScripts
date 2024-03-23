@@ -1,3 +1,4 @@
+-- @noindex
 -- @description rrx
 -- @author Richard Cook
 -- @version 0.0

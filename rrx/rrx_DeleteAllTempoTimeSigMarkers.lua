@@ -1,3 +1,4 @@
+-- @noindex
 -- @description Delete All Tempo and Time Signature Markers
 -- @author Richard Cook
 -- @version 0.0

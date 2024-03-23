@@ -1,3 +1,4 @@
+-- @noindex
 -- @description Set Timebases for Tempo Mapping
 -- @author Richard Cook
 -- @version 0.0
