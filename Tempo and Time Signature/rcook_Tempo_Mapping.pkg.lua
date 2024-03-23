@@ -1,7 +1,7 @@
 -- @metapackage
 -- @description Tempo Mapping
 -- @author Richard Cook
--- @version 0.01
+-- @version 0.02
 -- @about
 --  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam enim ante, condimentum in
 --  maximus sed, pellentesque non est. Suspendisse sagittis justo eu tortor dignissim, non laoreet
@@ -16,7 +16,9 @@
 -- @links
 --  Guide https://rcook.github.io/ReaScripts/tempo-and-time-signature/tempo-mapping.html
 -- @changelog
---  Adds documentation link
+--  Rename rcook_Set_Project_Timebases.lua to rcook_Set_Project_Media_Item_Timebases.lua
+--  Add instructions in error message when tempo mapping cannot be performed safely
+--  Fix error message displayed when js_ReaScriptAPI is not available
 -- @provides
 --  [main] rcook_Delete_All_Project_Tempo_Time_Sig_Markers.lua
 --  [main] rcook_Mark_Measure.lua
