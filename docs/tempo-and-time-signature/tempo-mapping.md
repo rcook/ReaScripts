@@ -1,5 +1,13 @@
 # Tempo mapping
 
+## Required dependencies
+
+You are strongly encouraged to manage REAPER packages using [ReaPack][reapack]. This
+package requires the following REAPER packages or extensions:
+
+* [SWS/S&M][sws-snm]
+* [js_ReaScriptAPI][js-reaperscript-api]
+
 ## Recommended keyboard shortcuts
 
 This is a good set of shortcuts for navigation and creating markers during
@@ -37,3 +45,7 @@ _Default_ shortcuts are factory-default REAPER keyboard bindings. You'll have to
 * Navigate through song's measures, beats and transients using keyboard shortcuts
 * Set the start of a measure using _{_ and the end using _}_
 * Use `rcook_Mark_Measure.lua` et al to create tempo/time signature markers to turn this into a measure in the song's timeline
+
+[js-reaperscript-api]: https://github.com/ReaTeam/Extensions/raw/master/index.xml
+[reapack]: https://reapack.com/
+[sws-snm]: https://www.sws-extension.org
