@@ -1,7 +1,7 @@
 -- @metapackage
 -- @description Tempo Mapping
 -- @author Richard Cook
--- @version 0.00
+-- @version 0.01
 -- @about
 --  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam enim ante, condimentum in
 --  maximus sed, pellentesque non est. Suspendisse sagittis justo eu tortor dignissim, non laoreet
@@ -13,8 +13,10 @@
 --  odio vel tortor. Curabitur vestibulum lectus tincidunt felis fermentum malesuada. Aenean
 --  commodo magna ac est fringilla, tempus ullamcorper eros mollis. Etiam sit amet mi arcu. Fusce
 --  nec convallis metus. Nulla at tempus nisi, non varius mauris.
+-- @links
+--  Guide https://rcook.github.io/ReaScripts/tempo-and-time-signature/tempo-mapping.html
 -- @changelog
---  Initial release
+--  Adds documentation link
 -- @provides
 --  [main] rcook_Delete_All_Project_Tempo_Time_Sig_Markers.lua
 --  [main] rcook_Mark_Measure.lua
