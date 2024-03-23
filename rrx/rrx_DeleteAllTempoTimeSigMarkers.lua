@@ -5,7 +5,7 @@
 -- @about
 --  Deletes all tempo and time signature markers
 
-dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx-lib.lua")
 
 local function main(ctx)
   delete_all_tempo_time_sig_markers(ctx.project_id)

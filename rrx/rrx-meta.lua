@@ -19,4 +19,4 @@
 --  [main] rrx_MarkMeasure_5_4.lua
 --  [main] rrx_MarkMeasure_6_8.lua
 --  [main] rrx_SetTimebasesForTempoMapping.lua
---  [nomain] rrx.lua
+--  [nomain] rrx-lib.lua

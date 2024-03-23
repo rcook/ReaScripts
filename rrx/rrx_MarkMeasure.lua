@@ -6,7 +6,7 @@
 --  Marks current time selection as a measure with user-supplied time
 --  signature
 
-dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx-lib.lua")
 
 local TIME_SIG_NUM_LABEL = "Time signature numerator"
 local TIME_SIG_DENOM_LABEL = "Time signature denominator"

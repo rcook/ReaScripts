@@ -5,7 +5,7 @@
 -- @about
 --  Sets timebases for tempo mapping
 
-dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx-lib.lua")
 
 local function main(ctx)
   if not reaper.SNM_SetIntConfigVarEx(ctx.project_id, "itemtimelock", 0) then
