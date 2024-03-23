@@ -11,7 +11,6 @@
 -- @provides
 --  [data] rrx_TEMPO_MAPPING.md
 --  [main] rrx_DeleteAllTempoTimeSigMarkers.lua
---  [main] rrx_GenerateConfigFiles.lua
 --  [main] rrx_MarkMeasure.lua
 --  [main] rrx_MarkMeasure_1_4.lua
 --  [main] rrx_MarkMeasure_2_4.lua

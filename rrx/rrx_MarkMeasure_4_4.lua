@@ -1,5 +1,4 @@
 -- @noindex
--- @key 21 52
 -- @description Mark Measure 4/4
 -- @author Richard Cook
 -- @version 0.0

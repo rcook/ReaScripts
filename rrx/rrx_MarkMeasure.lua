@@ -1,5 +1,4 @@
 -- @noindex
--- @key 21 48
 -- @description Mark Measure
 -- @author Richard Cook
 -- @version 0.0

@@ -1,5 +1,4 @@
 -- @noindex
--- @key 21 53
 -- @description Mark Measure 5/4
 -- @author Richard Cook
 -- @version 0.0
