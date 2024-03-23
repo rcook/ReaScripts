@@ -145,16 +145,18 @@ function check_timebases_for_tempo_mapping(project_id)
     return true
   end
 
+  local INSTRUCTIONS = "Please run \"rcook_Set_Project_Timebases.lua\" to configure your project and media items properly."
+
   if reaper.SNM_GetIntConfigVarEx(project_id, "itemtimelock", -100) ~= 0 then
-    exit("Timebase for items/envelopes/markers must be set to \"Time\"")
+    exit("Timebase for items/envelopes/markers must be set to \"Time\". " .. INSTRUCTIONS)
   end
 
   if reaper.SNM_GetIntConfigVarEx(project_id, "tempoenvtimelock", -100) ~=0 then
-    exit("Timebase for tempo/time signature envelope must be set to \"Time\"")
+    exit("Timebase for tempo/time signature envelope must be set to \"Time\". " .. INSTRUCTIONS)
   end
 
   if not all_midi_media_items_ignore_project_tempo(project_id) then
-    exit("One or more MIDI media items does not ignore project tempo")
+    exit("One or more MIDI media items does not ignore project tempo. " .. INSTRUCTIONS)
   end
 end
 
