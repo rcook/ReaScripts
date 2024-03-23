@@ -1,13 +1,15 @@
 -- @metapackage
 -- @description rrx
 -- @author Richard Cook
--- @version 0.05
+-- @version 0.06
 -- @about
 --  rrx&mdash;Richard's REAPER Extensions
 --  * [Tempo mapping](https://github.com/rcook/ReaScripts/blob/main/rrx/rrx_TEMPO_MAPPING.md)
 -- @changelog
---  Fixed paths on macOS/Linux
---  Sort menu items by description
+--  Changes ReaPack name to rrx.lua
+--  Removes configuration generator script
+--  Removes Markdown doc file
+--  Renames shared module to rrx-lib.lua
 -- @provides
 --  [main] rrx_DeleteAllTempoTimeSigMarkers.lua
 --  [main] rrx_MarkMeasure.lua

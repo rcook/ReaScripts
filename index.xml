@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <index version="1" name="rcook-reascripts" commit="d27525d7cf52dac8df50aafacf06ed6ae0ae3bfd">
   <category name="rrx">
-    <reapack name="rrx-meta.lua" type="script" desc="rrx">
+    <reapack name="rrx.lua" type="script" desc="rrx">
       <metadata>
         <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
 {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
