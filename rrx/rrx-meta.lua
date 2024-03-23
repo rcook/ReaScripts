@@ -1,0 +1,20 @@
+-- @metapackage
+-- @description rrx
+-- @author Richard Cook
+-- @version 0.0
+-- @about
+--  rrx&mdash;Richard's REAPER Extensions
+-- @provides
+--  [data] rrx_TEMPO_MAPPING.md
+--  [data] rrx.Actions.ReaperMenu
+--  [data] rrx.ReaperKeyMap
+--  [main] rrx_DeleteAllTempoTimeSigMarkers.lua
+--  [main] rrx_MarkMeasure.lua
+--  [main] rrx_MarkMeasure_1_4.lua
+--  [main] rrx_MarkMeasure_2_4.lua
+--  [main] rrx_MarkMeasure_3_4.lua
+--  [main] rrx_MarkMeasure_4_4.lua
+--  [main] rrx_MarkMeasure_5_4.lua
+--  [main] rrx_MarkMeasure_6_8.lua
+--  [main] rrx_SetTimebasesForTempoMapping.lua
+--  [nomain] rrx.lua
