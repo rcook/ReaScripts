@@ -9,7 +9,6 @@
 --  Fixed paths on macOS/Linux
 --  Sort menu items by description
 -- @provides
---  [data] rrx_TEMPO_MAPPING.md
 --  [main] rrx_DeleteAllTempoTimeSigMarkers.lua
 --  [main] rrx_MarkMeasure.lua
 --  [main] rrx_MarkMeasure_1_4.lua
