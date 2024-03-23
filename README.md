@@ -1,4 +1,4 @@
-# RRX&mdash;Richard's REAPER Extensions
+# rrx&mdash;Richard's REAPER Extensions
 
 Released under [MIT License](LICENSE)
 

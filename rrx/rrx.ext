@@ -1,0 +1,16 @@
+@description rrx
+@author Richard Cook
+@version 0.0
+@about
+  rrx&mdash;Richard's REAPER Extensions
+@provides
+  [script main] rrx_DeleteAllTempoTimeSigMarkers.lua
+  [script main] rrx_MarkMeasure.lua
+  [script main] rrx_MarkMeasure_1_4.lua
+  [script main] rrx_MarkMeasure_2_4.lua
+  [script main] rrx_MarkMeasure_3_4.lua
+  [script main] rrx_MarkMeasure_4_4.lua
+  [script main] rrx_MarkMeasure_5_4.lua
+  [script main] rrx_MarkMeasure_6_8.lua
+  [script main] rrx_SetTimebasesForTempoMapping.lua
+  [script nomain] rrx.lua
