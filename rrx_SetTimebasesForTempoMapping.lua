@@ -1,12 +1,12 @@
 --[[
    * ReaScript Name: Set Timebases for Tempo Mapping
    * Author: Richard Cook
-   * Author URI: https://github.com/rcook/reaper-lua.git
+   * Author URI: https://github.com/rcook/reaper-extensions.git
    * Licence: MIT
    * Version: 0.0
 --]]
 
-dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "lib.lua")
+dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 
 local function main(ctx)
   if not reaper.SNM_SetIntConfigVarEx(ctx.project_id, "itemtimelock", 0) then

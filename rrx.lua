@@ -1,6 +1,6 @@
 --[[
    * Author: Richard Cook
-   * Author URI: https://github.com/rcook/reaper-lua.git
+   * Author URI: https://github.com/rcook/reaper-extensions.git
    * Licence: MIT
    * Version: 0.0
 --]]
