@@ -7,6 +7,8 @@
 
 dofile(debug.getinfo(1).source:match("@?(.*[/\\])") .. "rrx.lua")
 
+local IS_WINDOWS = reaper.GetOS():lower() == "win"
+
 local EXTRA_KEYS = {
   {key = "29 77", command_id = 40364, section = 0, desc = "Main : Ctrl+Alt+Shift+M : Options: Toggle metronome"},
   {key = "13 221", command_id = 41040, section = 0, desc = "Main : Ctrl+Shift+] : Move edit cursor to start of next measure"},
@@ -15,14 +17,28 @@ local EXTRA_KEYS = {
   {key = "13 188", command_id = 41045, section = 0, desc = "Main : Ctrl+Shift+, : Move edit cursor back one beat"}
 }
 
+local function trim(s)
+  return s:gsub("^%s*(.-)%s*$", "%1")
+end
+
 local function normalize_path(p)
-  return p:gsub("/", "\\"):gsub("\\+$", "")
+  if IS_WINDOWS then
+    return p:gsub("/", "\\"):gsub("\\+$", "")
+  else
+    return p:gsub("\\", "/"):gsub("/+$", "")
+  end
 end
 
 local function join_paths(...)
   local p = ""
   for i, part in ipairs({...}) do
-    if i > 1 then p = p .. "\\" end
+    if i > 1 then
+      if IS_WINDOWS then
+        p = p .. "\\"
+      else
+        p = p .. "/"
+      end
+    end
     p = p .. part
   end
   return p
@@ -31,9 +47,9 @@ end
 local function read_script_action_id(path, section)
   for line in io.lines(join_paths(reaper.GetResourcePath(), "reaper-kb.ini")) do
     if line:sub(1,3) == "SCR" then
-      local s, action_id, desc, p = line:match("SCR .- (.-) (.-) (\".-\") (.*)")
-      p = normalize_path(p:gsub("\"", ""))
-      if p == path and tonumber(s) == section then
+      local section_temp, action_id, desc, p = line:match("SCR .- (.-) (.-) (\".-\") (.*)")
+      p = normalize_path(trim(p:gsub("\"", "")))
+      if p == path and tonumber(section_temp) == section then
         return "_" .. action_id
       end
     end
@@ -176,6 +192,8 @@ local function main(ctx)
 
     ::continue::
   end
+
+  table.sort(actions, function(a, b) return a.desc < b.desc end)
 
   local menu_ini = make_menu_ini(actions)
   local key_map_ini = make_key_map_ini(actions)
