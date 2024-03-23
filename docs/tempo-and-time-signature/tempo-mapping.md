@@ -1,4 +1,4 @@
-# [rcook-reascripts](/)&mdash;Tempo mapping
+# Tempo mapping
 
 ## Recommended keyboard shortcuts
 
