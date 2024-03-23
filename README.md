@@ -1,4 +1,4 @@
-# Richard's REAPER Scripts
+# rcook-reascripts&mdash;Richard's ReaScripts Repository
 
 ReaPack repository URL: [https://github.com/rcook/ReaScripts/raw/main/index.xml][rcook-reascripts]
 
