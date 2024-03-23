@@ -43,7 +43,7 @@ function run(title, main)
   end
 
   if not reaper.APIExists("JS_Dialog_BrowseForSaveFile") then
-    exit("Please install a recent version of ReaExtensions (https://github.com/ReaTeam/Extensions/raw/master/index.xml)")
+    exit("Please install a recent version of js_ReaScriptAPI (https://github.com/ReaTeam/Extensions/raw/master/index.xml)")
   end
 
   local ctx = {
