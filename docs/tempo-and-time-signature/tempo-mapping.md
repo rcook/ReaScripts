@@ -5,23 +5,32 @@
 This is a good set of shortcuts for navigation and creating markers during
 tempo mapping of a whole song:
 
-| Shortcut         | Description                                  | Type   |
-| ---              | ---                                          | ---    |
-| {                | Loop points: Set start point                 |        |
-| }                | Loop points: Set end point                   |        |
-| Tab              | Item navigation: Move cursor to next transient in items     |   |
-| Shift+Tab        | Item navigation: Move cursor to previous transient in items |   |
-| [                | Markers: Go to previous marker/project start |        |
-| ]                | Markers: Go to next marker/project end       |        |
-| Ctrl+Shift+[     | Move edit cursor to start of current measure | Custom |
-| Ctrl+Shift+]     | Move edit cursor to start of next measure    | Custom |
-| Ctrl+Shift+,     | Move edit cursor back one beat               | Custom |
-| Ctrl+Shift+.     | Move edit cursor forward one beat            | Custom |
-| Ctrl+Alt+Shift+M | Options: Toggle metronome                    | Custom |
-| Alt+Shift+0      | Script: rcook_Mark_Measure.lua               | Custom |
-| Alt+Shift+1      | Script: rcook_Mark_Measure_1_4.lua           | Custom |
-| Alt+Shift+2      | Script: rcook_Mark_Measure_2_4.lua           | Custom |
-| Alt+Shift+3      | Script: rcook_Mark_Measure_3_4.lua           | Custom |
-| Alt+Shift+4      | Script: rcook_Mark_Measure_4_4.lua           | Custom |
-| Alt+Shift+5      | Script: rcook_Mark_Measure_5_4.lua           | Custom |
-| Alt+Shift+6      | Script: rcook_Mark_Measure_6_8.lua           | Custom |
+| Shortcut           | Description                                  | Type   |
+| ---                | ---                                          | ---    |
+| _{_                | Loop points: Set start point                 |        |
+| _}_                | Loop points: Set end point                   |        |
+| _Tab_              | Item navigation: Move cursor to next transient in items     |   |
+| _Shift+Tab_        | Item navigation: Move cursor to previous transient in items |   |
+| _[_                | Markers: Go to previous marker/project start |        |
+| _]_                | Markers: Go to next marker/project end       |        |
+| _Ctrl+Shift+[_     | Move edit cursor to start of current measure | Custom |
+| _Ctrl+Shift+]_     | Move edit cursor to start of next measure    | Custom |
+| _Ctrl+Shift+,_     | Move edit cursor back one beat               | Custom |
+| _Ctrl+Shift+._     | Move edit cursor forward one beat            | Custom |
+| _Ctrl+Alt+Shift+M_ | Options: Toggle metronome                    | Custom |
+| _Alt+Shift+0_      | Script: rcook_Mark_Measure.lua               | Custom |
+| _Alt+Shift+1_      | Script: rcook_Mark_Measure_1_4.lua           | Custom |
+| _Alt+Shift+2_      | Script: rcook_Mark_Measure_2_4.lua           | Custom |
+| _Alt+Shift+3_      | Script: rcook_Mark_Measure_3_4.lua           | Custom |
+| _Alt+Shift+4_      | Script: rcook_Mark_Measure_4_4.lua           | Custom |
+| _Alt+Shift+5_      | Script: rcook_Mark_Measure_5_4.lua           | Custom |
+| _Alt+Shift+6_      | Script: rcook_Mark_Measure_6_8.lua           | Custom |
+
+## Overview
+
+* Enable _Editing Behavior_ \| _Transient detection_ \| _Tab through MIDI notes_
+  * This is particularly useful if you have MIDI drums
+  * _Tab_ and _Shift+Tab_ can then be used to easily move the edit cursor through the song's downbeats
+* Navigate through song's measures, beats and transients using keyboard shortcuts
+* Set the start of a measure using _{_ and the end using _}_
+* Use `rcook_Mark_Measure.lua` et al to create tempo/time signature markers to turn this into a measure in the song's timeline
