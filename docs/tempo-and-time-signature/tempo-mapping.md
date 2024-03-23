@@ -31,6 +31,7 @@ tempo mapping of a whole song:
 * Enable _Editing Behavior_ \| _Transient detection_ \| _Tab through MIDI notes_
   * This is particularly useful if you have MIDI drums
   * _Tab_ and _Shift+Tab_ can then be used to easily move the edit cursor through the song's downbeats
+* Run `rcook_Set_Project_Timebases.lua` to change project and MIDI item timebases to fix the position and duration of all media items in the project prior to marking up tempo and time signatures
 * Navigate through song's measures, beats and transients using keyboard shortcuts
 * Set the start of a measure using _{_ and the end using _}_
 * Use `rcook_Mark_Measure.lua` et al to create tempo/time signature markers to turn this into a measure in the song's timeline
