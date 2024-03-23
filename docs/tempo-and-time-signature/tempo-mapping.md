@@ -1,8 +1,9 @@
-# Category: Tempo and Time Signature
+# [rcook-reascripts](/)&mdash;Tempo mapping
 
-## Tempo mapping
+## Recommended keyboard shortcuts
 
-### Recommended keyboard shortcuts
+This is a good set of shortcuts for navigation and creating markers during
+tempo mapping of a whole song:
 
 | Shortcut         | Description                                  | Type   |
 | ---              | ---                                          | ---    |

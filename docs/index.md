@@ -4,4 +4,6 @@ ReaPack repository URL: [https://github.com/rcook/ReaScripts/raw/main/index.xml]
 
 ## Categories
 
-* [Tempo and Time Signature](tempo-and-time-signature.md)
+* [Tempo and Time Signature](tempo-and-time-signature)
+
+[rcook-reascripts]: https://github.com/rcook/ReaScripts/raw/main/index.xml
