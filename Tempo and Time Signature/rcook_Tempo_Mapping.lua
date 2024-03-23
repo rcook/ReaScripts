@@ -145,7 +145,7 @@ function check_timebases_for_tempo_mapping(project_id)
     return true
   end
 
-  local INSTRUCTIONS = "Please run \"rcook_Set_Project_Timebases.lua\" to configure your project and media items properly."
+  local INSTRUCTIONS = "Please run \"rcook_Set_Project_Media_Item_Timebases.lua\" to configure your project and media items properly."
 
   if reaper.SNM_GetIntConfigVarEx(project_id, "itemtimelock", -100) ~= 0 then
     exit("Timebase for items/envelopes/markers must be set to \"Time\". " .. INSTRUCTIONS)

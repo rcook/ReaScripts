@@ -1,5 +1,5 @@
 -- @noindex
--- @description Set project timebases
+-- @description Set project and media item timebases
 -- @author Richard Cook
 -- @version 0.0
 -- @about
@@ -29,7 +29,7 @@ local function main(ctx)
 
   reaper.UpdateTimeline()
 
-  message("Project timebases successfully set")
+  message("Project and media item timebases successfully set")
 end
 
-run("Set Project Timebases", main)
+run("Set Project and Media Item Timebases", main)

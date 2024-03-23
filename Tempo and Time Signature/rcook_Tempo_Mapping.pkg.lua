@@ -26,5 +26,5 @@
 --  [main] rcook_Mark_Measure_4_4.lua
 --  [main] rcook_Mark_Measure_5_4.lua
 --  [main] rcook_Mark_Measure_6_8.lua
---  [main] rcook_Set_Project_Timebases.lua
+--  [main] rcook_Set_Project_Media_Item_Timebases.lua
 --  [nomain] rcook_Tempo_Mapping.lua
