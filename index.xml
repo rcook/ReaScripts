@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="rrx" commit="e1f79527aaa983755dca6e3d13c24024cdb0d073">
+<index version="1" name="Richard's REAPER Scripts" commit="e1f79527aaa983755dca6e3d13c24024cdb0d073">
   <category name="rrx">
     <reapack name="rrx-meta.lua" type="script" desc="rrx">
       <metadata>
