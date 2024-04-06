@@ -124,7 +124,7 @@ function check_timebases_for_tempo_mapping(project_id)
   local function is_midi_media_item(media_item)
     for i = 0, reaper.CountTakes(media_item) - 1 do
       local take = reaper.GetMediaItemTake(media_item, i)
-      if reaper.TakeIsMIDI(take) then
+      if take ~= nil and reaper.TakeIsMIDI(take) then
         return true
       end
     end
