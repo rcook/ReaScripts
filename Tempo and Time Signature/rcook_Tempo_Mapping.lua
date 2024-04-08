@@ -118,11 +118,13 @@ function dump(obj)
   end
 end
 
-function check_timebases_for_tempo_mapping(project_id)
+function check_project_configured_for_tempo_mapping(project_id)
   assert(is_integer(project_id))
 
   local function is_midi_media_item(media_item)
-    for i = 0, reaper.CountTakes(media_item) - 1 do
+    local take_count = reaper.CountTakes(media_item)
+    for i = 0, take_count - 1 do
+      -- reaper.GetMediaItemTake will return nil if take is empty
       local take = reaper.GetMediaItemTake(media_item, i)
       if take ~= nil and reaper.TakeIsMIDI(take) then
         return true
@@ -131,15 +133,28 @@ function check_timebases_for_tempo_mapping(project_id)
     return false
   end
 
-  local function all_midi_media_items_ignore_project_tempo(project_id)
-    for i = 0, reaper.CountMediaItems(project_id) - 1 do
+  local function media_item_ignores_project_tempo(media_item)
+    if not is_midi_media_item(media_item) then
+      return true
+    end
+
+    local status, chunk = reaper.GetItemStateChunk(media_item, "", true)
+    assert(status)
+    for m in chunk:gmatch("IGNTEMPO ([0|1])") do
+      assert(m == "0" or m == "1")
+      if m ~= "1" then
+        return false
+      end
+    end
+    return true
+  end
+
+  local function all_media_items_ignore_project_tempo(project_id)
+    local media_item_count = reaper.CountMediaItems(project_id)
+    for i = 0, media_item_count - 1 do
       local media_item = reaper.GetMediaItem(project_id, i)
-      if is_midi_media_item(media_item) then
-        local status, chunk = reaper.GetItemStateChunk(media_item, "", true)
-        assert(status)
-        if chunk:match("IGNTEMPO 1") == nil then
-          return false
-        end
+      if not media_item_ignores_project_tempo(media_item) then
+        return false
       end
     end
     return true
@@ -155,7 +170,7 @@ function check_timebases_for_tempo_mapping(project_id)
     exit("Timebase for tempo/time signature envelope must be set to \"Time\". " .. INSTRUCTIONS)
   end
 
-  if not all_midi_media_items_ignore_project_tempo(project_id) then
+  if not all_media_items_ignore_project_tempo(project_id) then
     exit("One or more MIDI media items does not ignore project tempo. " .. INSTRUCTIONS)
   end
 end
@@ -277,7 +292,7 @@ function create_measure_tempo_time_sig_marker(project_id, start_time, end_time, 
   assert(is_time_sig_denom(time_sig_denom))
   assert(end_time > start_time)
 
-  check_timebases_for_tempo_mapping(project_id)
+  check_project_configured_for_tempo_mapping(project_id)
 
   local len = end_time - start_time
   local start_qn = reaper.TimeMap2_timeToQN(project_id, start_time)

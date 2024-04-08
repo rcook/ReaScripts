@@ -1,7 +1,7 @@
 -- @metapackage
 -- @description Tempo Mapping
 -- @author Richard Cook
--- @version 0.03
+-- @version 0.04
 -- @about
 --  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam enim ante, condimentum in
 --  maximus sed, pellentesque non est. Suspendisse sagittis justo eu tortor dignissim, non laoreet
@@ -16,7 +16,7 @@
 -- @links
 --  Guide https://rcook.github.io/ReaScripts/tempo-and-time-signature/tempo-mapping.html
 -- @changelog
---  Under unknown circumstances, GetMediaItemTake can return nil: check for nil before passing it to TakeIsMIDI
+--  Check all takes for IGNTEMPO=1 before allowing tempo mapping operations
 -- @provides
 --  [main] rcook_Delete_All_Project_Tempo_Time_Sig_Markers.lua
 --  [main] rcook_Mark_Measure.lua
