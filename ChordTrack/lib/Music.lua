@@ -199,30 +199,13 @@ local function uniq(list)
   return out
 end
 
-function Music.parseChord(chord_str, default_octave, opts)
-  opts = opts or {}
-  default_octave = default_octave or 4
-
-  chord_str = trim(chord_str or "")
-  if chord_str == "" then return nil end
-
-  local allowFallback = opts.allowFallback == true
-
-  -- Handle slash chords
-  local main_part, bass_note_name = splitSlashChord(chord_str)
-
-  -- Parse root from main_part
-  local root_name, suffix_str = main_part:match("^([A-G][#b]?)(.*)$")
-  if not root_name then return nil end
-  suffix_str = suffix_str or ""
-  suffix_str = trim(suffix_str)
-
+-- Attempt to build the interval list for one (root, suffix) interpretation.
+-- Returns intervals + root_pc on success, or nil on failure. allowFallback
+-- covers BOTH an unknown core suffix and unparseable extensions.
+local function tryInterpretation(root_name, suffix_str, allowFallback)
   local root_pc = parseRoot(root_name)
   if root_pc == nil then return nil end
 
-  local root_midi = (default_octave + 1) * 12 + root_pc
-
-  -- Core chord + remainder extensions
   local core_suffix, extensions_part = parseCoreAndExtensions(root_name, suffix_str)
 
   local formula = CHORD_FORMULAS[core_suffix]
@@ -242,14 +225,52 @@ function Music.parseChord(chord_str, default_octave, opts)
   if extensions_part and extensions_part ~= "" then
     local ext_intervals = parseExtensions(extensions_part)
     if ext_intervals == nil then
-      return nil
-    end
-    for _, v in ipairs(ext_intervals) do
-      table.insert(intervals, v)
+      if not allowFallback then return nil end
+    else
+      for _, v in ipairs(ext_intervals) do
+        table.insert(intervals, v)
+      end
     end
   end
 
-  intervals = uniq(intervals)
+  return uniq(intervals), root_pc
+end
+
+function Music.parseChord(chord_str, default_octave, opts)
+  opts = opts or {}
+  default_octave = default_octave or 4
+
+  chord_str = trim(chord_str or "")
+  if chord_str == "" then return nil end
+
+  local allowFallback = opts.allowFallback == true
+
+  -- Handle slash chords
+  local main_part, bass_note_name = splitSlashChord(chord_str)
+
+  -- Parse root from main_part
+  local root_name, suffix_str = main_part:match("^([A-G][#b]?)(.*)$")
+  if not root_name then return nil end
+  suffix_str = suffix_str or ""
+  suffix_str = trim(suffix_str)
+
+  -- Disambiguate "Cb6" (Cb + 6) vs "C" + "b6": if the accidental-including
+  -- root is followed by a digit, try the natural-root + b-prefixed suffix
+  -- first, and prefer it only when that alternative parses cleanly (no
+  -- fallback needed).
+  local intervals, root_pc
+  if #root_name == 2 and root_name:sub(2, 2) == "b" and suffix_str:sub(1, 1):match("%d") then
+    local alt_root = root_name:sub(1, 1)
+    local alt_suffix = "b" .. suffix_str
+    intervals, root_pc = tryInterpretation(alt_root, alt_suffix, false)
+  end
+
+  if not intervals then
+    intervals, root_pc = tryInterpretation(root_name, suffix_str, allowFallback)
+  end
+  if not intervals then return nil end
+
+  local root_midi = (default_octave + 1) * 12 + root_pc
 
   -- Compute MIDI notes from intervals
   -- Default behaviour: keep chord tones as-is (root + extensions).

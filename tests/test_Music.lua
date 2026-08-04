@@ -99,16 +99,25 @@ function TestParseChord_Extensions:test_maj7b9()    lu.assertEquals(pc("Cmaj7b9"
 function TestParseChord_Extensions:test_maj7sharp9()lu.assertEquals(pc("Cmaj7#9"), {60, 64, 67, 71, 75}) end
 function TestParseChord_Extensions:test_13()        lu.assertEquals(pc("C13"),     {60, 64, 67, 81}) end
 
-function TestParseChord_Extensions:test_Cb6_parses_as_Cb_plus_6()
-  -- TODO: revisit Music.lua — root regex "[A-G][#b]?" greedily consumes the
-  -- accidental, so "Cb6" parses as root Cb + extension "6", NOT as C + "b6".
-  -- There is no way to spell "C with flat-6" today.
-  lu.assertEquals(pc("Cb6"), {71, 75, 78, 80})
+function TestParseChord_Extensions:test_Cb6_parses_as_C_plus_flat6()
+  -- When "b" is followed by a digit, prefer the extension interpretation:
+  -- "Cb6" is C major + b6 (Ab).
+  lu.assertEquals(pc("Cb6"), {60, 64, 67, 68})
 end
 
-function TestParseChord_Extensions:test_Cb13_parses_as_Cb_plus_13()
-  -- TODO: revisit Music.lua — same greedy-accidental issue as Cb6 above.
-  lu.assertEquals(pc("Cb13"), {71, 75, 78, 92})
+function TestParseChord_Extensions:test_Cb13_parses_as_C_plus_flat13()
+  lu.assertEquals(pc("Cb13"), {60, 64, 67, 80})
+end
+
+function TestParseChord_Extensions:test_Cb_still_parses_as_Cb_major()
+  -- Non-digit after the accidental keeps "Cb" as the root (a real note).
+  lu.assertEquals(pc("Cb"),    {71, 75, 78})
+  lu.assertEquals(pc("Cbmaj"), {71, 75, 78})
+  lu.assertEquals(pc("Cbm7"),  {71, 74, 78, 81})
+end
+
+function TestParseChord_Extensions:test_Cb9_parses_as_C_plus_flat9()
+  lu.assertEquals(pc("Cb9"), {60, 64, 67, 73})
 end
 function TestParseChord_Extensions:test_maj7sharp11() lu.assertEquals(pc("Cmaj7#11"), {60, 64, 67, 71, 78}) end
 function TestParseChord_Extensions:test_sus4add9()  lu.assertEquals(pc("Csus4add9"), {60, 65, 67, 74}) end
@@ -163,12 +172,14 @@ function TestParseChord_Fallback:test_unknown_returns_nil_by_default()
   lu.assertNil(pc("Cbogus"))
 end
 
-function TestParseChord_Fallback:test_fallback_does_not_rescue_unknown_extensions()
-  -- TODO: revisit Music.lua — allowFallback only rescues an unknown *core*
-  -- suffix. Here parseCoreAndExtensions matches core "" then parseExtensions
-  -- fails on "bogus", so the whole parse still returns nil despite the flag.
-  lu.assertNil(pc("Cbogus", 4, {allowFallback = true}))
-  lu.assertNil(pc("Cxyz",   4, {allowFallback = true}))
+function TestParseChord_Fallback:test_fallback_rescues_unknown_extensions()
+  -- allowFallback now covers unknown extension tokens too: unknown residue
+  -- is dropped and the fallback triad returned.
+  -- "Cxyz" -> C root, no accidental, unknown ext -> C major triad.
+  lu.assertEquals(pc("Cxyz",   4, {allowFallback = true}), {60, 64, 67})
+  -- "Cbogus" -> Cb root (b not followed by a digit, so no alt path), unknown
+  -- suffix + unknown ext -> Cb major triad.
+  lu.assertEquals(pc("Cbogus", 4, {allowFallback = true}), {71, 75, 78})
 end
 
 TestParseChord_Invalid = {}
