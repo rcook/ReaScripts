@@ -254,7 +254,7 @@ function Music.parseChord(chord_str, default_octave, opts)
   intervals = uniq(intervals)
 
   -- Compute MIDI notes from intervals
-  -- Default behavior: keep chord tones as-is (root + extensions).
+  -- Default behaviour: keep chord tones as-is (root + extensions).
   local notes = {}
   for i = 1, #intervals do
     notes[i] = root_midi + intervals[i]
