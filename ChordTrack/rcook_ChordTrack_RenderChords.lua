@@ -25,11 +25,11 @@ local log = Util.log
 local getTrackByName = ReaperUtil.getTrackByName
 local split = Util.split
 
-local TITLE = "Render Chords"
+local TITLE = "Render Chords to MIDI Track"
 
 local function getOptions()
   local is_ok, s = reaper.GetUserInputs(
-    "Render Chords to MIDI Track",
+    TITLE,
     2,
     "Chord track,MIDI Track",
     string.format("%s,%s", Constants.DEFAULT_CHORD_TRACK_NAME, Constants.DEFAULT_MIDI_TRACK_NAME),
@@ -145,9 +145,10 @@ local function doRenderChords(track)
     end
   end
 
-  reaper.Undo_EndBlock("Replace MIDI item", -1)
-
   reaper.MIDI_Sort(take)
+
+  reaper.Undo_EndBlock("Render chords to MIDI track", -1)
+
   reaper.UpdateArrange()
   reaper.UpdateTimeline()
 end

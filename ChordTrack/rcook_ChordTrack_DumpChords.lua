@@ -25,12 +25,14 @@ local dump = Util.dump
 local getTrackByName = ReaperUtil.getTrackByName
 local log = Util.log
 
+local TITLE = "Dump Chords in Chord Track"
+
 local function doDumpChords(track)
   local chord_track = getTrackByName(Constants.DEFAULT_CHORD_TRACK_NAME)
   if not chord_track then
     reaper.ShowMessageBox(
       string.format("No track found with default chord track name \"%s\".", Constants.DEFAULT_CHORD_TRACK_NAME),
-      "Dump Chords",
+      TITLE,
       0)
     return
   end

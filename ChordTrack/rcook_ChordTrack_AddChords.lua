@@ -23,9 +23,11 @@ local appendEmptyItems = ReaperUtil.appendEmptyItems
 local getTrackByName = ReaperUtil.getTrackByName
 local split = Util.split
 
+local TITLE = "Add Chords to Chord Track"
+
 local function getOptions()
   local is_ok, s = reaper.GetUserInputs(
-    "Add Chords to Chord Track",
+    TITLE,
     2,
     "Chords,Chord track",
     string.format("C Am F G,%s", Constants.DEFAULT_CHORD_TRACK_NAME),
@@ -57,7 +59,10 @@ local function doAddChords()
 
   appendEmptyItems(chord_track, chords)
 
-  reaper.Undo_EndBlock("Append empty items for chords", -1)
+  reaper.Undo_EndBlock("Add chords to chord track", -1)
+
+  reaper.UpdateArrange()
+  reaper.UpdateTimeline()
 end
 
 doAddChords()
