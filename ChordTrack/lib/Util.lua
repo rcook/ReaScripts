@@ -27,13 +27,16 @@ function Util.dump(obj)
     local s = "{ "
     local i = 0
     for k, v in pairs(obj) do
+      local key
       if type(k) ~= "number" then
-        k = "\"" .. k .. "\""
+        key = "\"" .. k .. "\""
+      else
+        key = k
       end
       if i > 0 then
         s = s .. ", "
       end
-      s = s .. "[" .. k .. "] = " .. Util.dump(v)
+      s = s .. "[" .. key .. "] = " .. Util.dump(v)
       i = i + 1
     end
     return s .. " }"
