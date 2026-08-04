@@ -32,10 +32,15 @@ local CHORD_FORMULAS = {
   ["M7"]      = {0, 4, 7, 11},     -- Major 7th (jazz)
   ["dim7"]    = {0, 3, 6, 9},      -- Diminished 7th
   ["m7b5"]    = {0, 3, 6, 10},     -- Half-Diminished 7th
+  ["7sus2"]   = {0, 2, 7, 10},     -- Dominant 7th sus2
+  ["7sus4"]   = {0, 5, 7, 10},     -- Dominant 7th sus4
 
   ["9"]       = {0, 4, 7, 10, 14}, -- Dominant 9th (default assumed as b7 present)
   ["maj9"]    = {0, 4, 7, 11, 14}, -- Major 9th
   ["m9"]      = {0, 3, 7, 10, 14}, -- Minor 9th
+  ["9sus4"]   = {0, 5, 7, 10, 14}, -- Dominant 9th sus4
+
+  ["13sus4"]  = {0, 5, 7, 10, 14, 21}, -- Dominant 13th sus4
 }
 
 -- Base semitone values (pitch classes)

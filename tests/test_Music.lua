@@ -77,6 +77,10 @@ function TestParseChord_Qualities:test_m7b5()          lu.assertEquals(pc("Cm7b5
 function TestParseChord_Qualities:test_9()             lu.assertEquals(pc("C9"),    {60, 64, 67, 70, 74}) end
 function TestParseChord_Qualities:test_maj9()          lu.assertEquals(pc("Cmaj9"), {60, 64, 67, 71, 74}) end
 function TestParseChord_Qualities:test_m9()            lu.assertEquals(pc("Cm9"),   {60, 63, 67, 70, 74}) end
+function TestParseChord_Qualities:test_7sus4()         lu.assertEquals(pc("C7sus4"),  {60, 65, 67, 70}) end
+function TestParseChord_Qualities:test_7sus2()         lu.assertEquals(pc("C7sus2"),  {60, 62, 67, 70}) end
+function TestParseChord_Qualities:test_9sus4()         lu.assertEquals(pc("C9sus4"),  {60, 65, 67, 70, 74}) end
+function TestParseChord_Qualities:test_13sus4()        lu.assertEquals(pc("C13sus4"), {60, 65, 67, 70, 74, 81}) end
 
 function TestParseChord_Qualities:test_case_sensitivity_M7_vs_m7()
   lu.assertNotEquals(pc("CM7"), pc("Cm7"))
@@ -175,13 +179,6 @@ function TestParseChord_Invalid:test_whitespace()   lu.assertNil(pc("   ")) end
 function TestParseChord_Invalid:test_bad_root_X()   lu.assertNil(pc("X")) end
 function TestParseChord_Invalid:test_bad_root_H()   lu.assertNil(pc("H")) end
 function TestParseChord_Invalid:test_lowercase_root_rejected() lu.assertNil(pc("c")) end
-
-function TestParseChord_Invalid:test_C7sus4_currently_unparseable()
-  -- TODO: revisit Music.lua — longest core match picks "7", then parseExtensions
-  -- fails on "sus4" (not in known_tokens). Any "<digit>sus<n>" pattern is
-  -- unparseable today.
-  lu.assertNil(pc("C7sus4"))
-end
 
 function TestParseChord_Invalid:test_unknown_suffix() lu.assertNil(pc("Cbogus")) end
 function TestParseChord_Invalid:test_empty_bass()     lu.assertNil(pc("C/")) end
