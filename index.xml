@@ -92,11 +92,11 @@ Fix error message displayed when js_ReaScriptAPI is not available]]></changelog>
     </reapack>
   </category>
   <metadata>
-    <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 Courier;}}
+    <description><![CDATA[{\rtf1\ansi\deff0{\fonttbl{\f0 \fswiss Helvetica;}{\f1 \fmodern Courier;}}
 {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
 \widowctrl\hyphauto
 
-{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 rcook-reascripts\u8212-Richard's ReaScripts Repository\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel0 \b \fs36 rcook-reascripts\u8212-Richard's ReaScripts Repository\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 ReaPack repository URL: {\field{\*\fldinst{HYPERLINK "https://github.com/rcook/ReaScripts/raw/main/index.xml"}}{\fldrslt{\ul
 https://github.com/rcook/ReaScripts/raw/main/index.xml
 }}}
@@ -105,7 +105,7 @@ https://github.com/rcook/ReaScripts/raw/main/index.xml
 MIT License
 }}}
 \par}
-{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Install in REAPER using ReaPack\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \outlinelevel1 \b \fs32 Install in REAPER using ReaPack\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Start REAPER\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Go to {\i Extensions} | {\i ReaPack} | {\i Manage repositories...}\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 3.\tx360\tab Click on {\i Import/export...}\par}
