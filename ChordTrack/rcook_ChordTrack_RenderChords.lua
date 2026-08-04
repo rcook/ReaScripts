@@ -126,7 +126,6 @@ local function doRenderChords(track)
   local take = assert(reaper.GetActiveTake(item)) 
   assert(reaper.TakeIsMIDI(take))
 
-
   local chord_item_count = reaper.CountTrackMediaItems(chord_track)
   for i = 0, chord_item_count - 1 do
     local item = assert(reaper.GetTrackMediaItem(chord_track, i))
@@ -135,9 +134,12 @@ local function doRenderChords(track)
     local is_ok, notes = reaper.GetSetMediaItemInfo_String(item, "P_NOTES", "", false)
     assert(is_ok and notes)
     local midi_notes = Music.parseChord(notes)
-
-    for _, midi_note in ipairs(midi_notes) do
-      insertNote(take, start_pos, start_pos + len, midi_note)
+    if midi_notes then
+      for _, midi_note in ipairs(midi_notes) do
+        insertNote(take, start_pos, start_pos + len, midi_note)
+      end
+    else
+      log(string.format("Invalid chord name %s", notes))
     end
   end
 
