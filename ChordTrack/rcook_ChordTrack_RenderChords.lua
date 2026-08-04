@@ -111,7 +111,7 @@ local function doRenderChords(track)
 
   local midi_len = midi_end_pos - midi_start_pos
 
-  local midi_item_count = reaper.CountTrackMediaItems(midi_track) 
+  local midi_item_count = reaper.CountTrackMediaItems(midi_track)
   if midi_item_count > 0 then
     if reaper.ShowMessageBox(
         string.format("Replace existing %d item(s) on track \"%s\"?", midi_item_count, midi_track_name),
@@ -125,7 +125,7 @@ local function doRenderChords(track)
 
   ReaperUtil.clearTrackItems(midi_track)
   local item = assert(reaper.CreateNewMIDIItemInProj(midi_track, midi_start_pos, midi_len, false))
-  local take = assert(reaper.GetActiveTake(item)) 
+  local take = assert(reaper.GetActiveTake(item))
   assert(reaper.TakeIsMIDI(take))
 
   local chord_item_count = reaper.CountTrackMediaItems(chord_track)
