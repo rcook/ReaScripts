@@ -85,7 +85,11 @@ end
 TestParseChord_Extensions = {}
 
 function TestParseChord_Extensions:test_add9()      lu.assertEquals(pc("Cadd9"),   {60, 64, 67, 74}) end
-function TestParseChord_Extensions:test_add2()      lu.assertEquals(pc("Cadd2"),   {60, 64, 67, 62}) end -- TODO: revisit Music.lua — non-slash outputs are not sorted; ext 2 lands after triad.
+function TestParseChord_Extensions:test_add2()      lu.assertEquals(pc("Cadd2"),   {60, 62, 64, 67}) end
+function TestParseChord_Extensions:test_add4()      lu.assertEquals(pc("Cadd4"),   {60, 64, 65, 67}) end
+function TestParseChord_Extensions:test_add6()      lu.assertEquals(pc("Cadd6"),   {60, 64, 67, 69}) end
+function TestParseChord_Extensions:test_add11()     lu.assertEquals(pc("Cadd11"),  {60, 64, 67, 77}) end
+function TestParseChord_Extensions:test_add13()     lu.assertEquals(pc("Cadd13"),  {60, 64, 67, 81}) end
 function TestParseChord_Extensions:test_6()         lu.assertEquals(pc("C6"),      {60, 64, 67, 69}) end
 function TestParseChord_Extensions:test_maj7b9()    lu.assertEquals(pc("Cmaj7b9"), {60, 64, 67, 71, 73}) end
 function TestParseChord_Extensions:test_maj7sharp9()lu.assertEquals(pc("Cmaj7#9"), {60, 64, 67, 71, 75}) end
@@ -132,10 +136,16 @@ function TestParseChord_SlashChords:test_C_over_Db_adds_bass_no_removal()
 end
 
 function TestParseChord_SlashChords:test_output_is_sorted_ascending()
-  -- Slash-chord branch calls table.sort; non-slash branch does not.
   local out = pc("Cmaj7/G")
   for i = 2, #out do
-    lu.assertTrue(out[i] >= out[i - 1], "slash-chord output should be sorted ascending")
+    lu.assertTrue(out[i] >= out[i - 1], "output should be sorted ascending")
+  end
+end
+
+function TestParseChord_SlashChords:test_non_slash_output_is_sorted_ascending()
+  local out = pc("Cmaj7b9")
+  for i = 2, #out do
+    lu.assertTrue(out[i] >= out[i - 1], "non-slash output should be sorted ascending")
   end
 end
 

@@ -57,8 +57,12 @@ local NOTE_VALUES = {
 -- Extensions (intervals from root in semitones)
 -- Supports common numeric add-ons, including altered 9/11/13 variants.
 local EXT_OFFSETS = {
-  ["add2"] = {2},
-  ["add9"] = {14},
+  ["add2"]  = {2},
+  ["add4"]  = {5},
+  ["add6"]  = {9},
+  ["add9"]  = {14},
+  ["add11"] = {17},
+  ["add13"] = {21},
 
   ["2"]    = {2},
   ["9"]    = {14},
@@ -75,13 +79,29 @@ local EXT_OFFSETS = {
 
   ["6"]    = {9},
   ["b6"]   = {8},
-  ["13b9"] = {21}, -- (not standard; kept for completeness if you want parsing like this)
+}
+
+-- Longest-first so that e.g. "add11" wins over shorter prefixes.
+local EXT_TOKENS = {
+  "add11","add13","add2","add4","add6","add9",
+  "b11","#11","11",
+  "b13","#13","13",
+  "b9","#9","9",
+  "b6","6",
 }
 
 -- Helper: trim
 local function trim(s)
   return (s:gsub("^%s+", ""):gsub("%s+$", ""))
 end
+
+-- Core-suffix keys sorted longest-first so the greedy prefix match below is
+-- deterministic across Lua versions (pairs() ordering is unspecified).
+local CORE_KEYS = {}
+for k in pairs(CHORD_FORMULAS) do
+  if k ~= "" then table.insert(CORE_KEYS, k) end
+end
+table.sort(CORE_KEYS, function(a, b) return #a > #b end)
 
 local function parseRoot(note)
   if not note then return nil end
@@ -115,22 +135,16 @@ local function parseCoreAndExtensions(root_name, suffix_str)
   suffix_str = suffix_str or ""
   suffix_str = trim(suffix_str)
 
-  -- Build list of possible core suffixes from CHORD_FORMULAS (excluding "")
-  local keys = {}
-  for k in pairs(CHORD_FORMULAS) do
-    if k ~= "" then table.insert(keys, k) end
-  end
-
-  -- Include "" as fallback core suffix if nothing matches
   -- Find the longest key that matches at the start of suffix_str.
+  -- CORE_KEYS is sorted longest-first, so the first hit wins.
   local core_suffix = ""
   local core_len = 0
 
-  for _, k in ipairs(keys) do
-    -- exact prefix match (case-sensitive)
-    if suffix_str:sub(1, #k) == k and #k > core_len then
+  for _, k in ipairs(CORE_KEYS) do
+    if suffix_str:sub(1, #k) == k then
       core_suffix = k
       core_len = #k
+      break
     end
   end
 
@@ -140,24 +154,10 @@ local function parseCoreAndExtensions(root_name, suffix_str)
   return core_suffix, extensions_part
 end
 
--- Tokenize extension strings.
--- Supports patterns like: "add9", "b9", "#9", "9", "13", "b13", "11", "sus4" (not treated as extension),
--- and multiple tokens in sequence (e.g. "maj7b9add13").
+-- Tokenize extension strings left-to-right, longest-match at each step
+-- (e.g. "maj7b9add13" -> b9, add13). Returns nil if any residue is unknown.
 local function parseExtensions(ext_str)
   if not ext_str or ext_str == "" then return {} end
-
-  -- We parse from left to right, greedily matching known extension tokens.
-  -- Known tokens include:
-  --  - add2/add9/add11/add13 (we only added add2/add9; add11/add13 can be added similarly)
-  --  - b9/#9, b11/#11, b13/#13
-  --  - 2/9/11/13/6
-  local known_tokens = {
-    "add2","add9",
-    "b9","#9","9",
-    "b11","#11","11",
-    "b13","#13","13",
-    "6","b6",
-  }
 
   local offs = {}
   local s = ext_str
@@ -166,23 +166,16 @@ local function parseExtensions(ext_str)
     s = trim(s)
 
     local matched = false
-    for _, tok in ipairs(known_tokens) do
+    for _, tok in ipairs(EXT_TOKENS) do
       if s:sub(1, #tok) == tok then
-        -- append offsets for this token
-        local add = EXT_OFFSETS[tok]
-        if add then
-          for _, v in ipairs(add) do table.insert(offs, v) end
-        end
+        for _, v in ipairs(EXT_OFFSETS[tok]) do table.insert(offs, v) end
         s = s:sub(#tok + 1)
         matched = true
         break
       end
     end
 
-    if not matched then
-      -- If we can't parse an extension token, stop (or you can return nil).
-      return nil
-    end
+    if not matched then return nil end
   end
 
   return offs
@@ -296,11 +289,9 @@ function Music.parseChord(chord_str, default_octave, opts)
     end
 
     table.insert(notes, bass_midi)
-
-    -- Optional: keep ordering low-to-high
-    table.sort(notes)
   end
 
+  table.sort(notes)
   return notes
 end
 
