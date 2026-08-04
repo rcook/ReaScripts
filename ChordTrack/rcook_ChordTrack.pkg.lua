@@ -1,0 +1,19 @@
+-- @metapackage
+-- @description ChordTrack
+-- @author Richard Cook
+-- @version 0.01
+-- @about
+--  Generates and renders chord tracks compatible with Lil Chordbox
+--  https://github.com/iliaspoulakis/Reaper-Tools/blob/master/MIDI%20editor/Lil%20Chordbox.lua.
+-- @links
+--  Guide https://rcook.github.io/ReaScripts/chordtrack.html
+-- @changelog
+--  Initial version
+-- @provides
+--  [main] rcook_ChordTrack_AddChords.lua
+--  [main] rcook_ChordTrack_DumpChords.lua
+--  [main] rcook_ChordTrack_RenderChords.lua
+--  [nomain] lib/Constants.lua
+--  [nomain] lib/Music.lua
+--  [nomain] lib/ReaperUtil.lua
+--  [nomain] lib/Util.lua
