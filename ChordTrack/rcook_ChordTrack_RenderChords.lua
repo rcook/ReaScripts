@@ -121,6 +121,8 @@ local function doRenderChords(track)
     end
   end
 
+  reaper.Undo_BeginBlock()
+
   ReaperUtil.clearTrackItems(midi_track)
   local item = assert(reaper.CreateNewMIDIItemInProj(midi_track, midi_start_pos, midi_len, false))
   local take = assert(reaper.GetActiveTake(item)) 
@@ -143,8 +145,11 @@ local function doRenderChords(track)
     end
   end
 
+  reaper.Undo_EndBlock("Replace MIDI item", -1)
+
   reaper.MIDI_Sort(take)
   reaper.UpdateArrange()
+  reaper.UpdateTimeline()
 end
 
 doRenderChords()
