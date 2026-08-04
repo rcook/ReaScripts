@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="rcook-reascripts" commit="5550335144031f412353fedfaa0a413c96398a15">
+<index version="1" name="rcook-reascripts" commit="baebcdb3c99ffa6249b97bc69f850bf44a85eefc">
   <category name="ChordTrack">
     <reapack name="rcook_ChordTrack.pkg.lua" type="script" desc="ChordTrack">
       <metadata>
@@ -31,6 +31,16 @@
         <source file="lib/Music.lua">https://github.com/rcook/ReaScripts/raw/5550335144031f412353fedfaa0a413c96398a15/ChordTrack/lib/Music.lua</source>
         <source file="lib/ReaperUtil.lua">https://github.com/rcook/ReaScripts/raw/5550335144031f412353fedfaa0a413c96398a15/ChordTrack/lib/ReaperUtil.lua</source>
         <source file="lib/Util.lua">https://github.com/rcook/ReaScripts/raw/5550335144031f412353fedfaa0a413c96398a15/ChordTrack/lib/Util.lua</source>
+      </version>
+      <version name="0.03" author="Richard Cook" time="2026-08-04T05:14:24Z">
+        <changelog><![CDATA[Support "maj" chord; skip invalid chord names; begin and end undo block; update timeline after render]]></changelog>
+        <source main="main" file="rcook_ChordTrack_AddChords.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/rcook_ChordTrack_AddChords.lua</source>
+        <source main="main" file="rcook_ChordTrack_DumpChords.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/rcook_ChordTrack_DumpChords.lua</source>
+        <source main="main" file="rcook_ChordTrack_RenderChords.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/rcook_ChordTrack_RenderChords.lua</source>
+        <source file="lib/Constants.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/lib/Constants.lua</source>
+        <source file="lib/Music.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/lib/Music.lua</source>
+        <source file="lib/ReaperUtil.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/lib/ReaperUtil.lua</source>
+        <source file="lib/Util.lua">https://github.com/rcook/ReaScripts/raw/baebcdb3c99ffa6249b97bc69f850bf44a85eefc/ChordTrack/lib/Util.lua</source>
       </version>
     </reapack>
   </category>
