@@ -1,0 +1,290 @@
+local Music = {}
+
+local CHORD_FORMULAS = {
+  [""]        = {0, 4, 7},         -- Major Triad (default)
+  ["m"]       = {0, 3, 7},         -- Minor Triad
+  ["min"]     = {0, 3, 7},
+  ["dim"]     = {0, 3, 6},         -- Diminished
+  ["aug"]     = {0, 4, 8},         -- Augmented
+  ["sus2"]    = {0, 2, 7},         -- Suspended 2nd
+  ["sus4"]    = {0, 5, 7},         -- Suspended 4th
+
+  ["7"]       = {0, 4, 7, 10},     -- Dominant 7th
+  ["m7"]      = {0, 3, 7, 10},     -- Minor 7th
+  ["maj7"]    = {0, 4, 7, 11},     -- Major 7th (pop)
+  ["M7"]      = {0, 4, 7, 11},     -- Major 7th (jazz)
+  ["dim7"]    = {0, 3, 6, 9},      -- Diminished 7th
+  ["m7b5"]    = {0, 3, 6, 10},     -- Half-Diminished 7th
+
+  ["9"]       = {0, 4, 7, 10, 14}, -- Dominant 9th (default assumed as b7 present)
+  ["maj9"]    = {0, 4, 7, 11, 14}, -- Major 9th
+  ["m9"]      = {0, 3, 7, 10, 14}, -- Minor 9th
+}
+
+-- Base semitone values (pitch classes)
+local NOTE_VALUES = {
+  ["C"]  = 0,  ["B#"] = 0,
+  ["C#"] = 1,  ["Db"] = 1,
+  ["D"]  = 2,
+  ["D#"] = 3,  ["Eb"] = 3,
+  ["E"]  = 4,  ["Fb"] = 4,
+  ["F"]  = 5,  ["E#"] = 5,
+  ["F#"] = 6,  ["Gb"] = 6,
+  ["G"]  = 7,
+  ["G#"] = 8,  ["Ab"] = 8,
+  ["A"]  = 9,
+  ["A#"] = 10, ["Bb"] = 10,
+  ["B"]  = 11, ["Cb"] = 11
+}
+
+-- Extensions (intervals from root in semitones)
+-- Supports common numeric add-ons, including altered 9/11/13 variants.
+local EXT_OFFSETS = {
+  ["add2"] = {2},
+  ["add9"] = {14},
+
+  ["2"]    = {2},
+  ["9"]    = {14},
+  ["b9"]   = {13},
+  ["#9"]   = {15},
+
+  ["11"]   = {17},
+  ["b11"]  = {16},
+  ["#11"]  = {18},
+
+  ["13"]   = {21},
+  ["b13"]  = {20},
+  ["#13"]  = {22},
+
+  ["6"]    = {9},
+  ["b6"]   = {8},
+  ["13b9"] = {21}, -- (not standard; kept for completeness if you want parsing like this)
+}
+
+-- Helper: trim
+local function trim(s)
+  return (s:gsub("^%s+", ""):gsub("%s+$", ""))
+end
+
+local function parseRoot(note)
+  if not note then return nil end
+  note = trim(note)
+  return NOTE_VALUES[note]
+end
+
+-- Parse a chord name into:
+--   main_part (everything before slash)
+--   bass_part (everything after slash)
+-- Supports both "Cmaj7/G" and "Cmaj7 / G" (whitespace tolerant).
+local function splitSlashChord(chord_str)
+  -- split on a single slash, but allow whitespace around it
+  local main, bass = chord_str:match("^(.+)%s*/%s*([A-G][#b]?)$")
+  if main and bass then
+    return trim(main), trim(bass)
+  end
+  return chord_str, nil
+end
+
+-- Extract the "core chord suffix" from the main part, plus any remaining extension tokens.
+-- Example:
+--   "Cmaj7b9"     -> root=C, core_suffix="maj7", remaining="b9"
+--   "C7sus4add9"  -> core_suffix="7sus4"? (not in table) so we try longest core match
+--
+-- Strategy:
+--   1) Determine root.
+--   2) Try to find the longest matching suffix from CHORD_FORMULAS.
+--   3) The remainder (if any) is treated as extension tokens and parsed additively.
+local function parseCoreAndExtensions(root_name, suffix_str)
+  suffix_str = suffix_str or ""
+  suffix_str = trim(suffix_str)
+
+  -- Build list of possible core suffixes from CHORD_FORMULAS (excluding "")
+  local keys = {}
+  for k in pairs(CHORD_FORMULAS) do
+    if k ~= "" then table.insert(keys, k) end
+  end
+
+  -- Include "" as fallback core suffix if nothing matches
+  -- Find the longest key that matches at the start of suffix_str.
+  local core_suffix = ""
+  local core_len = 0
+
+  for _, k in ipairs(keys) do
+    -- exact prefix match (case-sensitive)
+    if suffix_str:sub(1, #k) == k and #k > core_len then
+      core_suffix = k
+      core_len = #k
+    end
+  end
+
+  local extensions_part = suffix_str:sub(core_len + 1)
+  extensions_part = trim(extensions_part)
+
+  return core_suffix, extensions_part
+end
+
+-- Tokenize extension strings.
+-- Supports patterns like: "add9", "b9", "#9", "9", "13", "b13", "11", "sus4" (not treated as extension),
+-- and multiple tokens in sequence (e.g. "maj7b9add13").
+local function parseExtensions(ext_str)
+  if not ext_str or ext_str == "" then return {} end
+
+  -- We parse from left to right, greedily matching known extension tokens.
+  -- Known tokens include:
+  --  - add2/add9/add11/add13 (we only added add2/add9; add11/add13 can be added similarly)
+  --  - b9/#9, b11/#11, b13/#13
+  --  - 2/9/11/13/6
+  local known_tokens = {
+    "add2","add9",
+    "b9","#9","9",
+    "b11","#11","11",
+    "b13","#13","13",
+    "6","b6",
+  }
+
+  local offs = {}
+  local s = ext_str
+
+  while s ~= "" do
+    s = trim(s)
+
+    local matched = false
+    for _, tok in ipairs(known_tokens) do
+      if s:sub(1, #tok) == tok then
+        -- append offsets for this token
+        local add = EXT_OFFSETS[tok]
+        if add then
+          for _, v in ipairs(add) do table.insert(offs, v) end
+        end
+        s = s:sub(#tok + 1)
+        matched = true
+        break
+      end
+    end
+
+    if not matched then
+      -- If we can't parse an extension token, stop (or you can return nil).
+      return nil
+    end
+  end
+
+  return offs
+end
+
+-- Deduplicate intervals
+local function uniq(list)
+  local seen = {}
+  local out = {}
+  for _, v in ipairs(list) do
+    if not seen[v] then
+      seen[v] = true
+      table.insert(out, v)
+    end
+  end
+  return out
+end
+
+function Music.parseChord(chord_str, default_octave, opts)
+  opts = opts or {}
+  default_octave = default_octave or 4
+
+  chord_str = trim(chord_str or "")
+  if chord_str == "" then return nil end
+
+  local allowFallback = opts.allowFallback == true
+
+  -- Handle slash chords
+  local main_part, bass_note_name = splitSlashChord(chord_str)
+
+  -- Parse root from main_part
+  local root_name, suffix_str = main_part:match("^([A-G][#b]?)(.*)$")
+  if not root_name then return nil end
+  suffix_str = suffix_str or ""
+  suffix_str = trim(suffix_str)
+
+  local root_pc = parseRoot(root_name)
+  if root_pc == nil then return nil end
+
+  local root_midi = (default_octave + 1) * 12 + root_pc
+
+  -- Core chord + remainder extensions
+  local core_suffix, extensions_part = parseCoreAndExtensions(root_name, suffix_str)
+
+  local formula = CHORD_FORMULAS[core_suffix]
+  if not formula then
+    if allowFallback then
+      formula = CHORD_FORMULAS[""]
+    else
+      return nil
+    end
+  end
+
+  local intervals = {}
+  for i = 1, #formula do
+    table.insert(intervals, formula[i])
+  end
+
+  if extensions_part and extensions_part ~= "" then
+    local ext_intervals = parseExtensions(extensions_part)
+    if ext_intervals == nil then
+      return nil
+    end
+    for _, v in ipairs(ext_intervals) do
+      table.insert(intervals, v)
+    end
+  end
+
+  intervals = uniq(intervals)
+
+  -- Compute MIDI notes from intervals
+  -- Default behavior: keep chord tones as-is (root + extensions).
+  local notes = {}
+  for i = 1, #intervals do
+    notes[i] = root_midi + intervals[i]
+  end
+
+  -- Slash chord handling:
+  -- "Cmaj7/G" means the chord tones are the same, but the bass note is forced to G
+  -- by adding/replacing a low G in a musically typical way.
+  --
+  -- Approach:
+  --   - Compute bass MIDI near the chord's octave: (default_octave)*12 + bass_pc
+  --   - Remove any existing note with the same pitch class as the bass and below root? (simple replace)
+  --   - Insert the bass note; ensure it's the lowest (common practice).
+  if bass_note_name then
+    local bass_pc = parseRoot(bass_note_name)
+    if bass_pc == nil then return nil end
+
+    -- bass in "root octave" (not +1), i.e. default_octave * 12 is MIDI for C in that octave region
+    -- This makes bass likely lower than root_midi.
+    local bass_midi = (default_octave) * 12 + bass_pc
+
+    -- Remove one occurrence of same pitch class that is closest to bass_midi (so we don’t duplicate it).
+    local bass_pc_mod12 = bass_pc % 12
+    local remove_index = nil
+    local best_dist = math.huge
+
+    for i = 1, #notes do
+      if notes[i] % 12 == bass_pc_mod12 then
+        local d = math.abs(notes[i] - bass_midi)
+        if d < best_dist then
+          best_dist = d
+          remove_index = i
+        end
+      end
+    end
+
+    if remove_index then
+      table.remove(notes, remove_index)
+    end
+
+    table.insert(notes, bass_midi)
+
+    -- Optional: keep ordering low-to-high
+    table.sort(notes)
+  end
+
+  return notes
+end
+
+return Music
