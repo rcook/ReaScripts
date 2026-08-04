@@ -1,14 +1,14 @@
 -- @metapackage
 -- @description ChordTrack
 -- @author Richard Cook
--- @version 0.02
+-- @version 0.03
 -- @about
 --  Generates and renders chord tracks compatible with Lil Chordbox
 --  https://github.com/iliaspoulakis/Reaper-Tools/blob/master/MIDI%20editor/Lil%20Chordbox.lua.
 -- @links
 --  Guide https://rcook.github.io/ReaScripts/chordtrack.html
 -- @changelog
---  Fix package path; add comment header to each script
+--  Support "maj" chord; skip invalid chord names; begin and end undo block; update timeline after render
 -- @provides
 --  [main] rcook_ChordTrack_AddChords.lua
 --  [main] rcook_ChordTrack_DumpChords.lua
