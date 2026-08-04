@@ -18,6 +18,7 @@ local Music = {}
 
 local CHORD_FORMULAS = {
   [""]        = {0, 4, 7},         -- Major Triad (default)
+  ["maj"]     = {0, 4, 7},         -- Major Triad (default)
   ["m"]       = {0, 3, 7},         -- Minor Triad
   ["min"]     = {0, 3, 7},
   ["dim"]     = {0, 3, 6},         -- Diminished
