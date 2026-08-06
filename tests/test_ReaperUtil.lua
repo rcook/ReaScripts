@@ -1,4 +1,4 @@
-local p = arg and arg[0] and arg[0]:match("(.*/)") or "./"
+local p = arg and arg[0] and arg[0]:match("(.*[/\\])") or "./"
 package.path = p .. "/../ChordTrack/?.lua;" .. p .. "?.lua;" .. package.path
 local lu = require("luaunit")
 local ReaperUtil = require("../ChordTrack/lib/ReaperUtil")
